@@ -1,0 +1,86 @@
+{
+  "projectType": "saas",
+  "projectName": "Aria",
+  "projectDescription": "A unified digital healthcare platform connecting doctors and patients through secure, ABHA-integrated digital prescriptions and medical records.",
+  "theme": "palm",
+  "primaryColor": "#10b981",
+  "lightColor": null,
+  "darkColor": null,
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "quickstart"
+            ]
+          },
+          {
+            "group": "For Doctors",
+            "pages": [
+              "doctors/overview",
+              "doctors/smart-dictation",
+              "doctors/patient-history",
+              "doctors/prescriptions"
+            ]
+          },
+          {
+            "group": "For Patients",
+            "pages": [
+              "patients/overview",
+              "patients/medical-records",
+              "patients/prescriptions",
+              "patients/sharing-records"
+            ]
+          },
+          {
+            "group": "Features",
+            "pages": [
+              "features/ai-assistance",
+              "features/digital-prescriptions",
+              "features/medical-history"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Integrations",
+        "groups": [
+          {
+            "group": "ABHA Integration",
+            "pages": [
+              "integrations/abha-overview",
+              "integrations/abha-setup",
+              "integrations/abdm-integration"
+            ]
+          },
+          {
+            "group": "Technical",
+            "pages": [
+              "technical/architecture",
+              "technical/security",
+              "technical/api-reference"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "AI-powered smart dictation with entity recognition",
+    "ABHA/ABDM integrated digital prescriptions",
+    "Complete medical history tracking",
+    "Secure patient-doctor communication",
+    "Digital record management and sharing"
+  ],
+  "publicApiSurface": [
+    "Smart Dictation API",
+    "Prescription Management API",
+    "Medical History API",
+    "ABHA Integration API",
+    "Patient Record Sharing API"
+  ]
+}
