@@ -1,0 +1,412 @@
+---
+title: 'System Architecture'
+description: 'Technical architecture overview of Aria Healthcare platform'
+---
+
+## Overview
+
+Aria Healthcare is built on a modern, scalable architecture leveraging Next.js 16 for the frontend, Supabase for backend services, and a comprehensive suite of React libraries for an enhanced user experience.
+
+## Technology Stack
+
+<Tabs>
+  <Tab title="Frontend">
+    ### Core Framework
+    - **Next.js 16.1.1** - React framework with App Router
+    - **React 18.3.1** - UI library with concurrent features
+    - **TypeScript 5.8.3** - Type-safe development
+
+    ### Key Features
+    - Server-side rendering (SSR)
+    - Static site generation (SSG)
+    - App Router architecture
+    - Automatic code splitting
+  </Tab>
+  
+  <Tab title="Backend">
+    ### Database & Auth
+    - **Supabase 2.86.0** - PostgreSQL database and authentication
+    - Row-level security (RLS) policies
+    - Real-time subscriptions
+    - File storage for medical records
+
+    ### API Layer
+    - RESTful APIs via Supabase
+    - Real-time WebSocket connections
+    - Type-safe client integration
+  </Tab>
+  
+  <Tab title="UI/UX">
+    ### Component Libraries
+    - **Radix UI** - Accessible component primitives
+    - **Tailwind CSS 3.4.17** - Utility-first styling
+    - **Framer Motion 12.23.24** - Animation library
+    - **Lucide React** - Icon system
+
+    ### State Management
+    - **TanStack React Query 5.83.0** - Server state management
+    - **React Hook Form 7.61.1** - Form state handling
+  </Tab>
+</Tabs>
+
+## Architecture Layers
+
+### 1. Presentation Layer
+
+The frontend is built with Next.js 16 using the App Router pattern for optimal performance and SEO.
+
+<CodeGroup>
+```tsx app/layout.tsx
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { Providers } from "./providers";
+
+const inter = Inter({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "Aria Healthcare - The Future of Medical Records",
+  description: "Transform your healthcare practice with Aria's AI-powered medical record management.",
+};
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>
+        <Providers>{children}</Providers>
+      </body>
+    </html>
+  );
+}
+```
+
+```tsx app/page.tsx
+import { Navbar } from "@/components/Navbar-nextjs";
+import { Hero } from "@/components/Hero-nextjs";
+import { Solution } from "@/components/Solution";
+import { FeatureShowcase } from "@/components/FeatureShowcase";
+import { CTA } from "@/components/CTA-nextjs";
+import { Footer } from "@/components/Footer-nextjs";
+
+export default function Home() {
+  return (
+    <div className="min-h-screen">
+      <Navbar />
+      <Hero />
+      <FeatureShowcase />
+      <Solution />
+      <CTA />
+      <Footer />
+    </div>
+  );
+}
+```
+</CodeGroup>
+
+### 2. State Management Layer
+
+React Query is used for efficient server state management with automatic caching, refetching, and synchronization.
+
+<CodeGroup>
+```tsx app/providers.tsx
+"use client";
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useState } from "react";
+import { Toaster } from "@/components/ui/toaster";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { Analytics } from "@vercel/analytics/react";
+
+export function Providers({ children }: { children: React.ReactNode }) {
+  const [queryClient] = useState(() => new QueryClient());
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        {children}
+        <Toaster />
+        <Analytics />
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+}
+```
+</CodeGroup>
+
+<Note>
+  React Query automatically handles caching, background refetching, and stale data management, reducing the need for manual state synchronization.
+</Note>
+
+### 3. Data Layer
+
+Supabase provides the backend infrastructure with PostgreSQL database, authentication, and real-time capabilities.
+
+<CodeGroup>
+```typescript src/integrations/supabase/client.ts
+import { createClient } from '@supabase/supabase-js';
+
+// Next.js environment variable handling
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.error('Missing Supabase environment variables');
+}
+
+// Singleton Supabase client instance
+export const supabase = createClient(
+  supabaseUrl || 'https://placeholder.supabase.co',
+  supabaseAnonKey || 'placeholder',
+);
+```
+</CodeGroup>
+
+### 4. Animation Layer
+
+Framer Motion provides smooth, performant animations throughout the application.
+
+<CodeGroup>
+```tsx src/components/Hero-nextjs.tsx
+"use client";
+
+import { motion } from "framer-motion";
+
+export const Hero = () => {
+  return (
+    <section className="relative min-h-screen flex items-center pt-20">
+      <div className="container relative z-10 mx-auto px-4 py-20">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="space-y-8"
+          >
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold">
+              Enhance your clinical workflows with
+              <span className="text-primary"> EMR-integrated AI</span>
+            </h1>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+```
+
+```tsx src/components/ui/scroll-animation.tsx
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+
+interface ScrollAnimationProps {
+  children: ReactNode;
+  delay?: number;
+  direction?: "up" | "down" | "left" | "right";
+  duration?: number;
+}
+
+export const ScrollAnimation = ({
+  children,
+  delay = 0,
+  direction = "up",
+  duration = 0.5,
+}: ScrollAnimationProps) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const getVariants = () => {
+    const distance = 50;
+    return {
+      hidden: {
+        opacity: 0,
+        y: direction === "up" ? distance : direction === "down" ? -distance : 0,
+        x: direction === "left" ? distance : direction === "right" ? -distance : 0,
+      },
+      visible: { opacity: 1, y: 0, x: 0 },
+    };
+  };
+
+  return (
+    <div ref={ref}>
+      <motion.div
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        variants={getVariants()}
+        transition={{ duration, delay, ease: "easeOut" }}
+      >
+        {children}
+      </motion.div>
+    </div>
+  );
+};
+```
+</CodeGroup>
+
+## Form Validation
+
+Zod provides runtime type validation for forms and API data.
+
+<CodeGroup>
+```tsx app/waitlist/page.tsx
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
+const formSchema = z.object({
+  name: z.string().min(1, { message: "Please enter your name." }),
+  email: z.string().email({ message: "Please enter a valid email address." }),
+  phoneNumber: z.string().min(5, { message: "Please enter a valid phone number." }),
+  userType: z.enum(["doctor", "patient", "other"], {
+    required_error: "Please select your main use case.",
+  }),
+  features: z.array(z.string()).refine((value) => value.length > 0, {
+    message: "Please select at least one feature.",
+  }),
+});
+
+const form = useForm<z.infer<typeof formSchema>>({
+  resolver: zodResolver(formSchema),
+  defaultValues: {
+    name: "",
+    email: "",
+    phoneNumber: "",
+    features: [],
+  },
+});
+```
+</CodeGroup>
+
+## Styling Architecture
+
+Tailwind CSS with custom design tokens for consistent theming.
+
+<CodeGroup>
+```typescript tailwind.config.ts
+import type { Config } from "tailwindcss";
+
+export default {
+  darkMode: ["class"],
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}"
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ["Inter", "sans-serif"],
+      },
+      colors: {
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+          glow: "hsl(var(--primary-glow))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+      },
+      backgroundImage: {
+        "gradient-hero": "var(--gradient-hero)",
+        "gradient-card": "var(--gradient-card)",
+      },
+    },
+  },
+  plugins: [require("tailwindcss-animate")],
+} satisfies Config;
+```
+</CodeGroup>
+
+## Performance Optimizations
+
+### Next.js Configuration
+
+<CodeGroup>
+```javascript next.config.mjs
+const nextConfig = {
+  reactStrictMode: true,
+  images: {
+    domains: [],
+  },
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "ariamed.ai" }],
+        destination: "https://www.ariamed.ai/:path*",
+        permanent: true,
+      },
+    ];
+  },
+}
+
+export default nextConfig;
+```
+</CodeGroup>
+
+### Key Optimizations
+
+1. **Server-side rendering** for initial page load performance
+2. **Automatic code splitting** to reduce bundle sizes
+3. **Image optimization** with Next.js Image component
+4. **Font optimization** with next/font
+5. **Analytics integration** via Vercel Analytics and Speed Insights
+
+<Warning>
+  Always ensure environment variables are properly configured for both development and production environments.
+</Warning>
+
+## Component Architecture
+
+The application follows a modular component structure:
+
+```
+src/
+├── components/
+│   ├── ui/              # Reusable UI primitives (Radix UI based)
+│   ├── Hero-nextjs.tsx  # Landing page hero section
+│   ├── Navbar-nextjs.tsx # Navigation component
+│   ├── Footer-nextjs.tsx # Footer component
+│   └── Solution.tsx     # Feature showcases
+├── integrations/
+│   └── supabase/
+│       └── client.ts    # Supabase client configuration
+├── hooks/
+│   ├── use-toast.ts    # Toast notification hook
+│   └── use-mobile.tsx  # Mobile detection hook
+└── lib/
+    └── utils.ts        # Utility functions
+```
+
+## Development Workflow
+
+<CodeGroup>
+```bash Development
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
+
+# Run linting
+npm run lint
+```
+</CodeGroup>
+
+## Deployment
+
+The application is optimized for deployment on Vercel with:
+
+- Automatic SSL certificates
+- Edge network distribution
+- Serverless functions
+- Analytics and monitoring
+- Preview deployments for pull requests
+
+<Note>
+  The architecture supports both server-side and client-side rendering patterns, enabling optimal performance for different use cases.
+</Note>

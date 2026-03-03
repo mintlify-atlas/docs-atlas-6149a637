@@ -1,0 +1,495 @@
+---
+title: "Digital Prescriptions"
+description: "Create ABDM-compliant digital prescriptions with smart medication search and automatic ABHA linking"
+---
+
+## Digital Prescription Workflow
+
+Create complete digital prescriptions that are automatically linked to the patient's ABHA account and accessible forever.
+
+<Info>
+  Every prescription you create is ABDM (Ayushman Bharat Digital Mission) compliant and automatically synced with the national health stack.
+</Info>
+
+## Creating a Prescription
+
+<Steps>
+  <Step title="Select patient">
+    Search for patient by name, phone number, or ABHA ID
+  </Step>
+  <Step title="Review patient history">
+    Check complete medical timeline for context (allergies, chronic conditions, recent medications)
+  </Step>
+  <Step title="Enter diagnosis">
+    Type or dictate the diagnosis and chief complaints
+  </Step>
+  <Step title="Add medications">
+    Use Smart Medication Search or voice dictation to add prescribed drugs
+  </Step>
+  <Step title="Specify dosages & duration">
+    Set dosage, frequency, timing, and treatment duration for each medication
+  </Step>
+  <Step title="Add instructions">
+    Include additional notes, lifestyle advice, or follow-up instructions
+  </Step>
+  <Step title="Send prescription">
+    Digital prescription is sent to patient's ABHA account and mobile app instantly
+  </Step>
+</Steps>
+
+## Smart Medication Search
+
+Instantly search our ABHA-compliant database of 100,000+ medications.
+
+### How to Search
+
+<Tabs>
+  <Tab title="Type to Search">
+    1. Click "Add Medication" in the prescription form
+    2. Start typing the medication name (generic or brand)
+    3. Results appear instantly after 3-4 letters
+    4. Select from dropdown suggestions
+  </Tab>
+  <Tab title="Voice Dictation">
+    1. Click the microphone icon
+    2. Say the medication name naturally
+    3. AI recognizes the medication and shows options
+    4. Confirm the correct dosage variant
+  </Tab>
+</Tabs>
+
+### Search Results Display
+
+When you search for a medication like "croc", you see:
+
+<Accordion title="Example: Searching for Crocin">
+  **4 medications found**
+  
+  1. **Crocin 500mg**
+     - Dosage: 500mg
+     - Composition: Paracetamol
+  
+  2. **Crocin 650mg**
+     - Dosage: 650mg
+     - Composition: Paracetamol
+  
+  3. **Crocin 1g**
+     - Dosage: 1g
+     - Composition: Paracetamol
+  
+  4. **Crocin Advance 500mg**
+     - Dosage: 500mg
+     - Composition: Paracetamol + Caffeine
+</Accordion>
+
+<Note>
+  The search shows all available dosage strengths and formulations so you can select the exact variant you want to prescribe.
+</Note>
+
+### Medication Details
+
+Each medication entry includes:
+
+<CardGroup cols={2}>
+  <Card title="Basic Information" icon="info">
+    - Generic name
+    - Brand name
+    - Dosage strength
+    - Formulation (tablet, capsule, syrup, injection)
+  </Card>
+  <Card title="Composition" icon="flask">
+    - Active pharmaceutical ingredient(s)
+    - Strength per unit
+    - Combination drug components
+  </Card>
+  <Card title="Common Dosages" icon="pill">
+    - Standard adult dosage
+    - Pediatric dosage (if applicable)
+    - Maximum daily dose
+  </Card>
+  <Card title="ABHA Compliance" icon="shield-check">
+    - ABDM drug code
+    - Standard terminology
+    - Interoperability assured
+  </Card>
+</CardGroup>
+
+## Advanced Medication Search Examples
+
+<Tabs>
+  <Tab title="Search: Rejunuron">
+    When you type "reju", you get:
+    
+    **3 medications found**
+    
+    1. **Rejunuron OD**
+       - Dosage: OD (Once Daily)
+       - Composition: Methylcobalamin + ALA + Folic Acid
+    
+    2. **Rejunuron Plus**
+       - Dosage: Plus
+       - Composition: Methylcobalamin + Vitamin B6
+    
+    3. **Rejunuron Forte**
+       - Dosage: Forte
+       - Composition: High Strength B-Complex
+  </Tab>
+  <Tab title="Search: Antibiotics">
+    Type "azithy" for Azithromycin:
+    
+    - Azithromycin 250mg
+    - Azithromycin 500mg
+    - Azithromycin 1g (single dose)
+    - Azithromycin Suspension (pediatric)
+  </Tab>
+  <Tab title="Search: Antihypertensives">
+    Type "amlod" for Amlodipine:
+    
+    - Amlodipine 2.5mg
+    - Amlodipine 5mg
+    - Amlodipine 10mg
+    - Amlodipine + Atenolol (combination)
+  </Tab>
+</Tabs>
+
+<Tip>
+  The search is fuzzy-tolerant and handles common misspellings, partial names, and both generic and brand name searches.
+</Tip>
+
+## Medication Addition Confirmation
+
+When you select a medication:
+
+1. **Visual Confirmation**
+   - Green checkmark icon appears
+   - "Selected: [Medication Name]" message
+   - "Medication added to prescription" confirmation
+
+2. **Automatic Population**
+   - Medication name and dosage filled in prescription form
+   - Ready for you to specify frequency and duration
+
+<Info>
+  You can add multiple medications to a single prescription. Each medication gets its own dosage and duration settings.
+</Info>
+
+## Dosage & Frequency Settings
+
+For each medication, specify:
+
+### Dosage Amount
+- Number of tablets/capsules/ml per dose
+- Examples: "1 tablet", "2 capsules", "5ml"
+
+### Frequency
+<Accordion title="Common Frequency Options">
+  - **OD (Once Daily)**: One time per day
+  - **BD (Twice Daily)**: Two times per day
+  - **TDS (Three Times Daily)**: Three times per day
+  - **QID (Four Times Daily)**: Four times per day
+  - **SOS (As Needed)**: When required
+  - **HS (Before Sleep)**: At bedtime
+  - **Custom**: Specify your own schedule
+</Accordion>
+
+### Timing
+- Before food
+- After food
+- With food
+- Empty stomach
+- Anytime
+
+### Duration
+- Number of days (e.g., "5 days", "14 days")
+- Or "Continue until follow-up"
+- Or "As directed"
+
+<Warning>
+  Always specify clear duration to prevent over-use or under-use of medications. Patients rely on these instructions.
+</Warning>
+
+## Prescription Components
+
+A complete digital prescription includes:
+
+### Header Information
+- Your name and credentials
+- Registration number
+- Clinic/hospital name and address
+- Prescription date and time
+- ABDM/ABHA compliance seal
+
+### Patient Information
+- Full name
+- ABHA ID
+- Age and gender
+- Contact information (if consent given)
+
+### Clinical Information
+<Tabs>
+  <Tab title="Chief Complaints">
+    Patient's reported symptoms:
+    - Fever
+    - Headache (3 days)
+    - Body aches
+    - Fatigue
+  </Tab>
+  <Tab title="Diagnosis">
+    Your clinical diagnosis:
+    - Primary: Acute Upper Respiratory Infection
+    - Secondary: (if applicable)
+  </Tab>
+  <Tab title="Vital Signs">
+    Recorded during consultation:
+    - Temperature: 99.8°F
+    - BP: 120/80 mmHg
+    - Pulse: 78 bpm
+    - SpO2: 98%
+  </Tab>
+</Tabs>
+
+### Prescribed Medications
+
+For each medication:
+
+```
+💊 Paracetamol 500mg
+   1 tablet, twice daily after meals
+   Duration: 5 days
+
+💊 Cetirizine 10mg
+   1 tablet, once daily before bedtime
+   Duration: 5 days
+```
+
+### Additional Instructions
+- Lifestyle advice
+- Dietary recommendations
+- Activity restrictions
+- When to seek immediate care
+- Follow-up date
+
+### Doctor's Signature
+- Digital signature (if configured)
+- Timestamp
+- Unique prescription ID
+
+## Using Voice Dictation for Prescriptions
+
+Speed up prescription creation with voice:
+
+<Steps>
+  <Step title="Open voice dictation">
+    Click microphone icon in the prescription form
+  </Step>
+  <Step title="Dictate naturally">
+    Say: "Patient complains of fever and headache for 3 days. Prescribing Paracetamol 500mg twice daily and Cetirizine 10mg once daily for 5 days."
+  </Step>
+  <Step title="AI processes">
+    - Complaints extracted: Fever, headache (3 days)
+    - Medications detected: Paracetamol 500mg, Cetirizine 10mg
+    - Dosages recognized: Twice daily, once daily
+    - Duration extracted: 5 days
+  </Step>
+  <Step title="Review and confirm">
+    Check detected entities and finalize prescription
+  </Step>
+</Steps>
+
+<Info>
+  Voice dictation is particularly useful during patient consultations when you want to document while maintaining eye contact with the patient.
+</Info>
+
+[Learn more about Voice Dictation →](/doctors/smart-dictation)
+
+## Drug Safety Checks
+
+Automated safety checks run before finalizing prescriptions:
+
+<Warning>
+  **Automatic Alerts:**
+  
+  1. **Drug Allergies**: System checks patient's allergy list
+     - Blocks prescription if allergic medication detected
+     - Shows warning for medications in same class
+  
+  2. **Drug-Drug Interactions**:
+     - Warns about dangerous combinations
+     - Shows interaction severity (major, moderate, minor)
+     - Suggests alternative medications
+  
+  3. **Duplicate Therapy**:
+     - Alerts if patient already has active prescription for same medication
+     - Shows prescribing doctor and date
+  
+  4. **Contraindications**:
+     - Checks against patient's chronic conditions
+     - Warns about medications unsafe for specific conditions (e.g., NSAIDs with kidney disease)
+</Warning>
+
+### Example Safety Alert
+
+<Accordion title="Drug Allergy Alert">
+  **⚠️ ALLERGY DETECTED**
+  
+  Cannot prescribe **Amoxicillin 500mg**
+  
+  Patient has documented allergy to:
+  - **Penicillin** (Documented: Nov 2024)
+  - Reaction: Severe rash and breathing difficulty
+  
+  **Suggested Alternatives:**
+  - Azithromycin 500mg
+  - Levofloxacin 500mg
+  - Doxycycline 100mg
+</Accordion>
+
+## Sending the Prescription
+
+Once finalized:
+
+<Steps>
+  <Step title="Review prescription">
+    Check all medications, dosages, and instructions one final time
+  </Step>
+  <Step title="Click 'Send Prescription'">
+    Prescription is processed and linked to ABHA
+  </Step>
+  <Step title="ABHA sync">
+    Prescription uploaded to patient's ABHA health record instantly
+  </Step>
+  <Step title="Patient notification">
+    Patient receives push notification on their mobile app
+  </Step>
+  <Step title="Accessible forever">
+    Prescription stored permanently in patient's digital health record
+  </Step>
+</Steps>
+
+<Note>
+  Patients can access their prescriptions anytime on their mobile devices, even without internet connection (offline mode shows cached prescriptions).
+</Note>
+
+## What Patients See
+
+When patients receive your prescription:
+
+<CardGroup cols={2}>
+  <Card title="Mobile Notification" icon="bell">
+    "New prescription from Dr. [Your Name]"
+    Instant push notification with preview
+  </Card>
+  <Card title="Digital View" icon="mobile">
+    Full prescription on mobile app
+    - Doctor details
+    - All medications
+    - Instructions
+    - Validity period
+  </Card>
+  <Card title="Download PDF" icon="download">
+    Downloadable PDF format
+    - For printing if needed
+    - For sharing with pharmacies
+    - For insurance claims
+  </Card>
+  <Card title="Medication Reminders" icon="clock">
+    Optional automatic reminders
+    - Based on prescribed schedule
+    - Helps improve compliance
+  </Card>
+</CardGroup>
+
+## Prescription Templates
+
+Create templates for common conditions:
+
+<Accordion title="Example: Hypertension Management Template">
+  **Template Name:** HTN - Routine Management
+  
+  **Default Medications:**
+  - Amlodipine 5mg OD
+  - Telmisartan 40mg OD
+  
+  **Default Instructions:**
+  - Check BP daily morning and evening
+  - Reduce salt intake
+  - Regular exercise 30 min/day
+  - Follow-up in 2 weeks
+  
+  **Usage:** Select template → Customize for patient → Send
+</Accordion>
+
+<Tip>
+  Templates save time for recurring prescriptions while still allowing complete customization for each patient.
+</Tip>
+
+## Prescription History
+
+View all prescriptions you've created:
+
+- Filter by patient
+- Filter by date range
+- Search by medication
+- Search by diagnosis
+- Export for records
+
+<Info>
+  Your prescription history is useful for audits, insurance verification, and tracking patient treatment plans over time.
+</Info>
+
+## ABDM Compliance
+
+All prescriptions automatically comply with ABDM standards:
+
+<CardGroup cols={2}>
+  <Card title="Standard Terminology" icon="book">
+    Uses ABDM-approved drug names and codes
+  </Card>
+  <Card title="Interoperable" icon="repeat">
+    Can be read by any ABDM-linked system
+  </Card>
+  <Card title="Secure" icon="lock">
+    End-to-end encryption for patient privacy
+  </Card>
+  <Card title="Auditable" icon="file-search">
+    Complete audit trail for compliance
+  </Card>
+</CardGroup>
+
+## Best Practices
+
+<Steps>
+  <Step title="Always check allergies">
+    Review patient allergy list before prescribing any new medication
+  </Step>
+  <Step title="Review active medications">
+    Check what patient is currently taking to avoid duplicates and interactions
+  </Step>
+  <Step title="Specify clear durations">
+    Never leave duration ambiguous - be specific about treatment length
+  </Step>
+  <Step title="Include follow-up">
+    Always specify when patient should return for review
+  </Step>
+  <Step title="Use patient-friendly language">
+    Write instructions patients can understand ("after breakfast" instead of "post-prandial")
+  </Step>
+</Steps>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Voice Dictation" icon="microphone" href="/doctors/smart-dictation">
+    Learn advanced voice dictation techniques for faster prescriptions
+  </Card>
+  <Card title="Patient History" icon="history" href="/doctors/patient-history">
+    Master patient timeline navigation and AI health assistant
+  </Card>
+  <Card title="Overview" icon="home" href="/doctors/overview">
+    Return to doctor platform overview
+  </Card>
+</CardGroup>
+
+<Tip>
+  **Pro Workflow**: Open patient history → Use AI assistant to check allergies → Voice dictate prescription → Quick review → Send. Total time: Under 2 minutes.
+</Tip>

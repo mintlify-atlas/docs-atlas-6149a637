@@ -1,0 +1,471 @@
+---
+title: Complete Medical History Tracking
+description: Access comprehensive patient timelines with prescriptions, lab reports, imaging, and medical records all in one unified view
+---
+
+Aria provides a complete, chronological view of every patient's medical journey. Through ABHA integration, doctors can access the full medical history, and patients can maintain a permanent, never-lost health record.
+
+## Patient Timeline Overview
+
+Every patient in Aria has a unified timeline that aggregates all medical records in chronological order.
+
+### Timeline Components
+
+The patient timeline includes:
+
+<CardGroup cols={2}>
+  <Card title="Prescriptions" icon="file-text">
+    All digital prescriptions created by any doctor, with complete medication details
+  </Card>
+  <Card title="Lab Reports" icon="flask">
+    Blood tests, urine tests, and other laboratory results uploaded by patients or labs
+  </Card>
+  <Card title="Imaging Reports" icon="scan">
+    X-rays, CT scans, MRIs, and ultrasound reports with images when available
+  </Card>
+  <Card title="Medical Documents" icon="folder">
+    Hospital discharge summaries, specialist reports, and vaccination records
+  </Card>
+</CardGroup>
+
+### Timeline Features
+
+- **Chronological Order**: All records sorted by date, newest first
+- **Expandable Entries**: Tap any record to view full details
+- **Search and Filter**: Find specific records by type, date, or keyword
+- **Quick Summary**: Patient snapshot with active conditions, allergies, and current medications
+
+## Patient Summary Card
+
+At the top of every patient timeline is a quick reference card:
+
+```
+Patient: Sarah Johnson
+Age: 42 years • Gender: Female
+ABHA ID: #MR-4521
+Status: Active Patient
+
+Active Conditions: Hypertension
+Known Allergies: Penicillin  
+Current Medications: Lisinopril 10mg OD
+```
+
+<Info>
+The patient summary automatically updates based on the most recent prescriptions and medical records.
+</Info>
+
+## Accessing Medical History
+
+### For Doctors
+
+<Steps>
+  <Step title="Select Patient">
+    Search for the patient by name, phone number, or ABHA ID in your patient list.
+  </Step>
+  
+  <Step title="View Timeline">
+    The patient's complete medical timeline loads automatically, showing all ABHA-linked records.
+  </Step>
+  
+  <Step title="Filter Records">
+    Use filters to narrow down by:
+    - Record type (prescriptions, labs, imaging)
+    - Date range (last week, month, year, custom)
+    - Specific condition or medication
+  </Step>
+  
+  <Step title="Expand Details">
+    Tap any timeline entry to view complete details:
+    - Full prescription with medications and dosages
+    - Lab results with reference ranges
+    - Imaging reports with findings
+  </Step>
+  
+  <Step title="Quick AI Summary">
+    Use the RAG-powered assistant to ask: "Give me a summary of Sarah's health" for instant overview.
+  </Step>
+</Steps>
+
+### For Patients
+
+Patients can access their complete history through the Aria Patient App:
+
+<Steps>
+  <Step title="Login with ABHA">
+    Authenticate using ABHA ID and OTP verification.
+  </Step>
+  
+  <Step title="View My Records">
+    See all prescriptions and medical records from all healthcare providers in one timeline.
+  </Step>
+  
+  <Step title="Upload Records">
+    Add old prescriptions, lab reports, or medical documents by:
+    - Taking photos of paper records
+    - Uploading PDF files
+    - Scanning documents
+  </Step>
+  
+  <Step title="Share Records">
+    Share specific records or complete history with:
+    - New doctors you visit
+    - Pharmacies for medication fulfillment
+    - Family members for caregiving
+    - Insurance providers for claims
+  </Step>
+</Steps>
+
+## Timeline Entry Examples
+
+### Prescription Entry
+
+When expanded, a prescription entry shows:
+
+```
+Prescription - Dec 15, 2025
+
+Diagnosis: Acute Upper Respiratory Infection
+Symptoms: Fever (99.8°F), cough, sore throat, nasal congestion
+
+Prescribed Medications:
+• Paracetamol 500mg
+  - Dosage: 1 tablet, twice daily after meals
+  - Duration: 5 days
+  
+• Cetirizine 10mg  
+  - Dosage: 1 tablet, once daily before bedtime
+  - Duration: 5 days
+
+Prescribed by: Dr. Rajesh Kumar, MBBS, MD
+Clinic: HealthCare Clinic, Mumbai
+```
+
+### Lab Report Entry
+
+When expanded, a lab report shows:
+
+```
+Lab Report - Dec 10, 2025
+Test: Complete Blood Count (CBC)
+
+Results:
+• Hemoglobin: 13.5 g/dL (Normal: 12-15 g/dL)
+• WBC Count: 8,200 cells/μL (Normal: 4,000-11,000)
+• Platelet Count: 250,000/μL (Normal: 150,000-400,000)
+• RBC Count: 4.8 million/μL (Normal: 4.2-5.4)
+
+Lab: PathLabs, Mumbai
+Status: All values within normal range
+```
+
+### Imaging Report Entry
+
+```
+Imaging Report - Nov 15, 2025
+Type: Chest X-Ray (PA View)
+
+Findings:
+• Lungs: Clear, no infiltrates
+• Heart: Normal size and contour  
+• No pleural effusion
+• Bones: Normal
+
+Impression: Normal chest radiograph
+
+Radiologist: Dr. Priya Sharma, MD (Radiology)
+Imaging Center: Scan Diagnostics, Mumbai
+```
+
+## Medical Record Uploads
+
+Patients can digitize their old medical records, ensuring nothing is lost.
+
+### Supported Upload Types
+
+<CardGroup cols={2}>
+  <Card title="Prescriptions" icon="file-text">
+    Scan paper prescriptions from any doctor
+  </Card>
+  <Card title="Lab Reports" icon="flask">
+    Upload blood tests, urine tests, and diagnostic reports
+  </Card>
+  <Card title="Imaging" icon="scan">
+    Add X-rays, CT scans, MRIs as images or PDFs
+  </Card>
+  <Card title="Hospital Records" icon="building-2">
+    Upload discharge summaries, OPD notes, surgery reports
+  </Card>
+</CardGroup>
+
+### Upload Process
+
+<Steps>
+  <Step title="Choose Upload Type">
+    Select the type of medical record you're uploading (prescription, lab report, imaging, etc.).
+  </Step>
+  
+  <Step title="Capture or Select File">
+    Either:
+    - Take a photo using your phone camera
+    - Select an existing image from gallery
+    - Upload a PDF document
+  </Step>
+  
+  <Step title="Add Metadata">
+    Provide details:
+    - Date of the record
+    - Doctor/hospital name
+    - Type of test or diagnosis
+    - Any relevant notes
+  </Step>
+  
+  <Step title="AI Processing (Optional)">
+    Aria's AI can extract text from scanned documents to make them searchable and categorize medications automatically.
+  </Step>
+  
+  <Step title="Save to Timeline">
+    The record is added to your timeline and linked to your ABHA ID.
+  </Step>
+</Steps>
+
+<Note>
+Uploaded images are stored securely and can be viewed in high resolution. OCR (Optical Character Recognition) makes handwritten prescriptions searchable.
+</Note>
+
+## Complete Patient View
+
+The aggregated history feature provides doctors with unprecedented insight:
+
+### Active Conditions Tracking
+
+Aria automatically identifies and tracks:
+
+- **Chronic Conditions**: Diabetes, hypertension, asthma based on prescription patterns
+- **Recent Illnesses**: Temporary conditions from recent visits
+- **Allergies**: Documented drug and food allergies
+- **Immunizations**: Vaccination history and upcoming due dates
+
+### Medication History
+
+View comprehensive medication patterns:
+
+- All medications ever prescribed to the patient
+- Current active medications
+- Medication adherence patterns
+- Drug interaction warnings based on history
+- Generic alternatives previously used
+
+### Diagnostic History
+
+Track all diagnostic tests over time:
+
+```
+Hemoglobin Trend (Last 12 months):
+Dec 2025: 13.5 g/dL
+Sep 2025: 13.2 g/dL  
+Jun 2025: 12.8 g/dL
+Mar 2025: 13.1 g/dL
+
+Trend: Stable, within normal range
+```
+
+<Info>
+Aria can generate trend charts for common lab values like hemoglobin, blood sugar, cholesterol, etc., helping identify patterns over time.
+</Info>
+
+## RAG-Powered History Search
+
+The Patient Health Assistant enables natural language queries about medical history.
+
+### Example Queries
+
+<CardGroup cols={1}>
+  <Card title="Medication History">
+    **Query**: "What antibiotics has this patient taken?"
+    
+    **Response**: Lists all antibiotic prescriptions with dates, dosages, and prescribing doctors. Highlights if any were for similar conditions.
+  </Card>
+  
+  <Card title="Symptom Patterns">
+    **Query**: "Has the patient complained of headaches before?"
+    
+    **Response**: References all prescriptions and records mentioning headaches, showing frequency and typical treatments.
+  </Card>
+  
+  <Card title="Test Results">
+    **Query**: "Show me the latest blood sugar levels"
+    
+    **Response**: Retrieves most recent lab reports with blood glucose values, comparing to previous results.
+  </Card>
+  
+  <Card title="Treatment Effectiveness">
+    **Query**: "Did the last treatment for fever work?"
+    
+    **Response**: Analyzes follow-up visits and prescriptions to determine if symptoms resolved or required additional treatment.
+  </Card>
+</CardGroup>
+
+### How RAG Search Works
+
+<Steps>
+  <Step title="Natural Language Input">
+    Type or speak your question in plain English about the patient's history.
+  </Step>
+  
+  <Step title="Semantic Search">
+    AI searches across all patient records using semantic understanding, not just keyword matching.
+  </Step>
+  
+  <Step title="Context Retrieval">
+    Relevant records are retrieved with context (dates, doctors, related symptoms).
+  </Step>
+  
+  <Step title="Summarized Response">
+    AI generates a concise, accurate answer with references to specific records.
+  </Step>
+  
+  <Step title="Verify Sources">
+    Click on any reference to jump directly to that record in the timeline.
+  </Step>
+</Steps>
+
+<Warning>
+RAG responses are based on available records in the system. Always verify critical information by reviewing the actual medical records referenced in the response.
+</Warning>
+
+## History Visibility and Sharing
+
+### Doctor Access Permissions
+
+Patients control which doctors can access their history:
+
+- **Automatic Access**: Doctors who have created prescriptions for the patient
+- **Shared Access**: Patients can grant access to new doctors
+- **Temporary Access**: Time-limited sharing for consultations
+- **Revocable Access**: Patients can revoke access at any time
+
+### Export and Sharing
+
+Both doctors and patients can export medical history:
+
+<CardGroup cols={2}>
+  <Card title="PDF Export" icon="file-pdf">
+    Generate comprehensive PDF reports with timeline and all records
+  </Card>
+  <Card title="FHIR Format" icon="code">
+    Export in FHIR format for sharing with other ABDM-compatible systems
+  </Card>
+  <Card title="Selective Export" icon="filter">
+    Choose specific date ranges or record types to export
+  </Card>
+  <Card title="Secure Sharing" icon="lock">
+    Share with password protection or time-limited access links
+  </Card>
+</CardGroup>
+
+## Benefits of Unified History
+
+### For Doctors
+
+<Steps>
+  <Step title="Complete Context">
+    Make better diagnoses with full patient history, not just what patient remembers.
+  </Step>
+  
+  <Step title="Avoid Duplicates">
+    See recent tests and avoid ordering unnecessary duplicate lab work.
+  </Step>
+  
+  <Step title="Track Patterns">
+    Identify recurring symptoms, medication responses, and health trends.
+  </Step>
+  
+  <Step title="Continuity of Care">
+    Provide consistent care even if patient has seen multiple doctors.
+  </Step>
+</Steps>
+
+### For Patients
+
+- **Never Lose Records**: Everything stored permanently in the cloud
+- **Easy Sharing**: Share history with new doctors instantly
+- **Complete Ownership**: You control who sees your medical data
+- **Lifetime Access**: Access your entire medical history anytime, anywhere
+- **Family Care**: Manage medical history for elderly parents or children
+
+## Privacy and Security
+
+Aria's medical history system is built with privacy at its core:
+
+### Data Protection
+
+<CardGroup cols={2}>
+  <Card title="Encryption" icon="shield">
+    All records encrypted with AES-256 encryption at rest and in transit
+  </Card>
+  <Card title="Access Logs" icon="eye">
+    Every record access is logged with timestamp and user details
+  </Card>
+  <Card title="Patient Consent" icon="check-circle">
+    Doctors must have patient consent to access medical history
+  </Card>
+  <Card title="ABHA Standards" icon="badge-check">
+    Full compliance with ABDM privacy and security guidelines
+  </Card>
+</CardGroup>
+
+### Patient Rights
+
+Patients have complete control:
+
+- View who has accessed their records
+- Grant or revoke doctor access permissions
+- Download their complete medical history
+- Request deletion of specific records (subject to legal retention requirements)
+- Export data to other ABHA-compatible platforms
+
+<Info>
+Aria is compliant with India's Digital Personal Data Protection Act and maintains SOC 2 certification for healthcare data handling.
+</Info>
+
+## Best Practices
+
+### For Doctors
+
+<Steps>
+  <Step title="Review Before Prescribing">
+    Always check the patient timeline before creating a new prescription to avoid drug interactions and duplicate therapies.
+  </Step>
+  
+  <Step title="Use RAG Assistant">
+    Leverage the AI assistant for quick queries: "Any drug allergies?" or "Previous treatments for similar symptoms?"
+  </Step>
+  
+  <Step title="Document Thoroughly">
+    Add detailed diagnosis and clinical notes to prescriptions for future reference.
+  </Step>
+  
+  <Step title="Verify Patient Reports">
+    When patients mention past treatments, verify against the timeline rather than relying on memory.
+  </Step>
+</Steps>
+
+### For Patients
+
+<Steps>
+  <Step title="Upload Old Records">
+    Digitize your old paper prescriptions and lab reports to build a complete history.
+  </Step>
+  
+  <Step title="Keep Updated">
+    Upload new lab reports and medical documents promptly.
+  </Step>
+  
+  <Step title="Verify Information">
+    Review your timeline regularly to ensure all information is accurate.
+  </Step>
+  
+  <Step title="Share Proactively">
+    When visiting a new doctor, share your medical history access to enable better care.
+  </Step>
+</Steps>

@@ -1,0 +1,272 @@
+---
+title: "Smart Medical Dictation"
+description: "Create prescriptions naturally with AI-powered voice dictation and automatic entity recognition"
+---
+
+## Voice-Powered Prescription Creation
+
+Aria's Smart Medical Dictation allows you to create prescriptions by speaking naturally. Our AI automatically identifies and highlights medications, dosages, symptoms, and medical terminology in real-time.
+
+<Info>
+  No need to follow rigid formats or templates - just speak as you normally would during patient consultation.
+</Info>
+
+## How It Works
+
+<Steps>
+  <Step title="Start dictating">
+    Click the microphone icon and speak naturally about the patient's condition and treatment
+  </Step>
+  <Step title="Real-time entity recognition">
+    AI identifies and highlights:
+    - **Medications**: Automatically detected and styled with medication formatting
+    - **Symptoms**: Highlighted with visual indicators
+    - **Dosages**: Extracted with proper units (mg, g, ml, etc.)
+    - **Medical terminology**: Recognized and validated
+  </Step>
+  <Step title="Review and confirm">
+    Check the detected entities shown as badges below the dictation box
+  </Step>
+  <Step title="Finalize prescription">
+    Detected medications are automatically added to the prescription with proper dosages
+  </Step>
+</Steps>
+
+## Example Dictation Flow
+
+Here's what happens when you dictate a typical prescription:
+
+<Tabs>
+  <Tab title="What You Say">
+    ```
+    "Patient complains of fever and headache for 3 days. 
+    Prescribing Paracetamol 500mg and Cetirizine 10mg for symptom relief."
+    ```
+  </Tab>
+  <Tab title="What AI Detects">
+    **Symptoms Detected:**
+    - Fever
+    - Headache
+    
+    **Medications Detected:**
+    - Paracetamol 500mg
+    - Cetirizine 10mg
+    
+    **Additional Context:**
+    - Duration: 3 days
+    - Purpose: Symptom relief
+  </Tab>
+  <Tab title="Result">
+    A structured prescription with:
+    - Chief complaints: Fever, headache (3 days)
+    - Prescribed medications: Paracetamol 500mg, Cetirizine 10mg
+    - Ready to send to patient's ABHA account
+  </Tab>
+</Tabs>
+
+## Visual Entity Recognition
+
+As you dictate, entities are highlighted in different styles:
+
+<CardGroup cols={2}>
+  <Card title="Medications" icon="pill">
+    Highlighted with **subtle background** and border
+    
+    Example: `Paracetamol 500mg`
+  </Card>
+  <Card title="Symptoms" icon="activity">
+    Highlighted with **amber background** for quick identification
+    
+    Example: `fever`, `headache`
+  </Card>
+</CardGroup>
+
+<Note>
+  The visual highlighting helps you quickly verify that the AI correctly understood your dictation before finalizing the prescription.
+</Note>
+
+## Detected Entity Badges
+
+Below the dictation text, you'll see real-time badges showing detected entities:
+
+<Accordion title="Example Badge Display">
+  **Detected:**
+  
+  - 💊 Paracetamol 500mg (Medication)
+  - 💊 Cetirizine 10mg (Medication)
+  - ⚡ Fever (Symptom)
+  - ⚡ Headache (Symptom)
+</Accordion>
+
+## Supported Medical Entities
+
+The AI recognizes a wide range of medical entities:
+
+### Medications
+- Generic drug names (Paracetamol, Metformin, etc.)
+- Brand names (Crocin, Dolo, etc.)
+- Dosage forms (tablets, capsules, syrup, injections)
+- Dosage strengths with units (500mg, 1g, 10ml)
+
+### Symptoms & Conditions
+- Common symptoms (fever, cough, headache, nausea)
+- Chronic conditions (hypertension, diabetes)
+- Acute conditions (URI, gastritis, migraine)
+
+### Medical Terminology
+- Vital signs (BP, temperature, pulse)
+- Laboratory values (blood sugar, HbA1c)
+- Clinical observations
+
+<Tip>
+  The entity recognition engine is trained on Indian medical terminology and commonly prescribed medications in India, making it highly accurate for local practice patterns.
+</Tip>
+
+## Best Practices
+
+### For Accurate Recognition
+
+<Steps>
+  <Step title="Speak clearly">
+    Use a normal speaking pace - not too fast, not too slow
+  </Step>
+  <Step title="Include dosages">
+    Always mention dosage amounts with medications ("Paracetamol 500mg" not just "Paracetamol")
+  </Step>
+  <Step title="Use standard terminology">
+    Prefer generic names over colloquialisms when possible
+  </Step>
+  <Step title="Verify detected entities">
+    Always check the badge display before finalizing
+  </Step>
+</Steps>
+
+### Common Dictation Patterns
+
+<Tabs>
+  <Tab title="Acute Condition">
+    ```
+    Patient presents with acute upper respiratory infection.
+    Fever 99.8°F, cough, sore throat.
+    Prescribing Azithromycin 500mg OD for 3 days,
+    Paracetamol 650mg SOS for fever.
+    ```
+  </Tab>
+  <Tab title="Chronic Management">
+    ```
+    Hypertensive patient, BP 150/95.
+    Continue Amlodipine 5mg OD.
+    Added Telmisartan 40mg OD for better control.
+    Review after 2 weeks.
+    ```
+  </Tab>
+  <Tab title="Multi-symptom">
+    ```
+    Complaints of headache, nausea, and dizziness for 2 days.
+    Suspect migraine. Starting Sumatriptan 50mg as needed,
+    Domperidone 10mg before meals for nausea.
+    ```
+  </Tab>
+</Tabs>
+
+## Integration with Smart Medication Search
+
+When the AI detects a medication name during dictation, it automatically links to the Smart Medication Search database:
+
+<Info>
+  If you say "Crocin", the system will offer you specific dosage options from the ABHA-compliant medication database (Crocin 500mg, Crocin 650mg, Crocin Advance, etc.)
+</Info>
+
+<Accordion title="How medication suggestions work">
+  1. You dictate a partial or complete medication name
+  2. AI matches it against 100,000+ medications in the database
+  3. You get instant suggestions with:
+     - Available dosage strengths
+     - Composition details
+     - Common administration routes
+  4. Select the exact medication variant with one click
+</Accordion>
+
+## Dictation Interface
+
+The dictation interface provides clear visual feedback:
+
+### Active Dictation Indicator
+- Pulsing microphone icon shows recording is active
+- Blinking cursor indicates where text is being added
+
+### Live Text Display
+- Text appears in real-time as you speak
+- Entity highlighting updates dynamically
+- Scroll automatically follows new text
+
+### Entity Badge Panel
+- Updates live as entities are detected
+- Color-coded by type (medications, symptoms)
+- Click badges to edit if needed
+
+<Warning>
+  Always review the final prescription before sending to the patient. While the AI is highly accurate, medical documentation requires human verification.
+</Warning>
+
+## Error Handling
+
+### Unrecognized Terms
+
+If the AI doesn't recognize a medication or term:
+
+<Steps>
+  <Step title="Check spelling">
+    The term appears without highlighting - verify you spoke it correctly
+  </Step>
+  <Step title="Use medication search">
+    Manually search for the medication using Smart Medication Search
+  </Step>
+  <Step title="Add manually">
+    You can always type or select medications manually if dictation doesn't catch them
+  </Step>
+</Steps>
+
+### Incorrect Detection
+
+<Accordion title="What if the AI misidentifies something?">
+  - Click on the detected entity badge
+  - Choose "Remove" or "Edit"
+  - The text highlighting will update accordingly
+  - You can re-dictate that portion or type it manually
+</Accordion>
+
+## Performance Tips
+
+<CardGroup cols={2}>
+  <Card title="Environment" icon="volume-2">
+    Use in a quiet environment for best recognition accuracy. Background noise can affect entity detection.
+  </Card>
+  <Card title="Microphone" icon="microphone">
+    Use a good quality microphone or headset. Built-in laptop mics work but dedicated mics are better.
+  </Card>
+  <Card title="Internet" icon="wifi">
+    Stable internet connection required for real-time AI processing and entity recognition.
+  </Card>
+  <Card title="Language" icon="globe">
+    Currently optimized for English medical terminology. Hindi and regional language support coming soon.
+  </Card>
+</CardGroup>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Smart Medication Search" icon="search" href="/doctors/prescriptions">
+    Learn how to quickly search and add medications from the 100,000+ drug database
+  </Card>
+  <Card title="Complete Prescriptions" icon="file-text" href="/doctors/prescriptions">
+    Understand the full prescription creation workflow
+  </Card>
+  <Card title="Patient History" icon="history" href="/doctors/patient-history">
+    Access complete patient timelines while creating prescriptions
+  </Card>
+</CardGroup>
+
+<Tip>
+  **Pro Tip**: Combine dictation with the Patient Health Assistant. Ask "Any drug allergies?" via voice before prescribing to get instant answers from patient history.
+</Tip>

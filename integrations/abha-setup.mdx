@@ -1,0 +1,202 @@
+---
+title: "ABHA Setup Guide"
+description: "Step-by-step guide to configure ABHA integration in Aria"
+---
+
+## Prerequisites
+
+Before setting up ABHA integration, ensure you have:
+
+<Steps>
+  <Step title="ABDM Registration">
+    Register your healthcare facility with ABDM and obtain your facility ID
+  </Step>
+  
+  <Step title="API Credentials">
+    Request API access credentials from the ABDM sandbox or production environment
+  </Step>
+  
+  <Step title="SSL Certificate">
+    Obtain a valid SSL certificate for secure communication with ABDM servers
+  </Step>
+</Steps>
+
+<Warning>
+ABHA integration requires compliance with data protection regulations. Ensure your infrastructure meets ABDM security standards.
+</Warning>
+
+## Configuration Steps
+
+### 1. Configure ABDM Credentials
+
+Set up your ABDM API credentials in the Aria configuration:
+
+```json
+{
+  "abdm": {
+    "clientId": "your-client-id",
+    "clientSecret": "your-client-secret",
+    "facilityId": "your-facility-id",
+    "environment": "sandbox" // or "production"
+  }
+}
+```
+
+<Note>
+Start with the sandbox environment for testing before moving to production.
+</Note>
+
+### 2. Enable ABHA Authentication
+
+Configure ABHA authentication to allow patients to link their ABHA IDs:
+
+```javascript
+// Enable ABHA login flow
+const abhaConfig = {
+  enableABHALogin: true,
+  authMethods: ['mobile', 'aadhaar', 'abha-number'],
+  consentTimeout: 300 // seconds
+};
+```
+
+### 3. Set Up Health Locker Sync
+
+Enable automatic synchronization of prescriptions to patient ABHA health lockers:
+
+<Steps>
+  <Step title="Configure Webhooks">
+    Set up webhooks to receive notifications when prescriptions are created
+  </Step>
+  
+  <Step title="Enable Auto-Sync">
+    Configure automatic push of digital prescriptions to ABHA health lockers
+  </Step>
+  
+  <Step title="Set Consent Rules">
+    Define consent requirements for accessing patient health records
+  </Step>
+</Steps>
+
+### 4. Test the Integration
+
+Verify your ABHA integration is working correctly:
+
+```bash
+# Test ABHA authentication
+curl -X POST https://your-aria-instance/api/abha/verify \
+  -H "Content-Type: application/json" \
+  -d '{"abhaId": "12-3456-7890-1234"}'
+
+# Test prescription sync
+curl -X POST https://your-aria-instance/api/prescriptions/sync \
+  -H "Authorization: Bearer your-token" \
+  -d '{"prescriptionId": "abc123"}'
+```
+
+<Info>
+Use test ABHA IDs provided in the ABDM sandbox for initial testing.
+</Info>
+
+## Patient Onboarding
+
+Guide your patients through linking their ABHA ID:
+
+### Option 1: ABHA Number
+
+<Steps>
+  <Step title="Patient Enters ABHA Number">
+    Patient provides their 14-digit ABHA number
+  </Step>
+  
+  <Step title="OTP Verification">
+    System sends OTP to registered mobile number for verification
+  </Step>
+  
+  <Step title="Account Linking">
+    Upon successful verification, ABHA ID is linked to Aria account
+  </Step>
+</Steps>
+
+### Option 2: Aadhaar-based Creation
+
+<Steps>
+  <Step title="Aadhaar Entry">
+    Patient provides Aadhaar number (if they don't have ABHA)
+  </Step>
+  
+  <Step title="OTP Verification">
+    Verify mobile number linked to Aadhaar
+  </Step>
+  
+  <Step title="ABHA Creation">
+    System creates new ABHA ID and links it to patient account
+  </Step>
+</Steps>
+
+## Security Best Practices
+
+<Warning>
+Never store ABHA credentials in plain text. Use encrypted storage and secure key management.
+</Warning>
+
+- **Encrypt Data in Transit**: Always use HTTPS/TLS for API communications
+- **Implement Consent Management**: Obtain explicit patient consent before accessing health records
+- **Audit Logging**: Maintain comprehensive logs of all ABHA transactions
+- **Regular Security Audits**: Conduct periodic security assessments of your ABHA integration
+- **Data Retention Policies**: Follow ABDM guidelines for data storage and retention
+
+## Troubleshooting
+
+### Common Issues
+
+<AccordionGroup>
+  <Accordion title="ABHA Verification Fails">
+    **Solution**: Verify that the ABHA number is correct and the patient's mobile number is updated in the ABHA system.
+  </Accordion>
+  
+  <Accordion title="Prescription Sync Errors">
+    **Solution**: Check your API credentials and ensure the prescription format complies with FHIR standards required by ABDM.
+  </Accordion>
+  
+  <Accordion title="Timeout During Authentication">
+    **Solution**: Increase the consent timeout value in your configuration or check network connectivity to ABDM servers.
+  </Accordion>
+</AccordionGroup>
+
+## Production Checklist
+
+Before going live with ABHA integration:
+
+- [ ] Complete ABDM production environment registration
+- [ ] Obtain production API credentials
+- [ ] Configure SSL certificates for production
+- [ ] Test end-to-end patient flow
+- [ ] Verify prescription sync to health lockers
+- [ ] Implement error handling and logging
+- [ ] Set up monitoring and alerts
+- [ ] Train staff on ABHA workflows
+- [ ] Prepare patient education materials
+
+<Tip>
+Run a pilot program with a small group of patients before full rollout to identify and resolve any issues.
+</Tip>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="ABDM Integration" icon="network-wired" href="/integrations/abdm-integration">
+    Learn about the broader ABDM ecosystem
+  </Card>
+  
+  <Card title="API Reference" icon="code" href="/technical/api-reference">
+    Explore the Aria API documentation
+  </Card>
+</CardGroup>
+
+## Support
+
+If you encounter issues during setup:
+
+- Review the [ABDM Developer Documentation](https://sandbox.abdm.gov.in/docs)
+- Contact ABDM support for API-related issues
+- Reach out to Aria support for platform-specific assistance

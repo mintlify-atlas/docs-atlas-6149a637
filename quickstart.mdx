@@ -1,80 +1,342 @@
 ---
-title: "Quickstart"
-description: "Start building awesome documentation in minutes"
+title: "Quickstart Guide"
+description: "Get started with Aria healthcare platform in minutes"
 ---
 
-## Get started in three steps
+# Get Started with Aria
 
-Get your documentation site running locally and make your first customization.
+Welcome to Aria! This guide will help you understand the platform and join our waitlist to be among the first users of India's most advanced digital healthcare platform.
 
-### Step 1: Set up your local environment
+<Info>
+  Aria is currently in development. Join our waitlist to get early access when we launch.
+</Info>
 
-<AccordionGroup>
-  <Accordion icon="copy" title="Clone your docs locally">
-    During the onboarding process, you created a GitHub repository with your docs content if you didn't already have one. You can find a link to this repository in your [dashboard](https://dashboard.mintlify.com).
-    
-    To clone the repository locally so that you can make and preview changes to your docs, follow the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) guide in the GitHub docs.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Start the preview server">
-    1. Install the Mintlify CLI: `npm i -g mint`
-    2. Navigate to your docs directory and run: `mint dev`
-    3. Open `http://localhost:3000` to see your docs live!
-    
-    <Tip>Your preview updates automatically as you edit files.</Tip>
-  </Accordion>
-</AccordionGroup>
+## Understanding Aria
 
-### Step 2: Deploy your changes
-
-<AccordionGroup>
-  <Accordion icon="github" title="Install our GitHub app">
-    Install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app).
-    
-    Our GitHub app automatically deploys your changes to your docs site, so you don't need to manage deployments yourself.
-</Accordion>
-<Accordion icon="palette" title="Update your site name and colors">
-    For a first change, let's update the name and colors of your docs site.
-
-    1. Open `docs.json` in your editor.
-    2. Change the `"name"` field to your project name.
-    3. Update the `"colors"` to match your brand.
-    4. Save and see your changes instantly at `http://localhost:3000`.
-
-    <Tip>Try changing the primary color to see an immediate difference!</Tip>
-  </Accordion>
-</AccordionGroup>
-
-### Step 3: Go live
-
-<Accordion icon="rocket" title="Publish your docs">
-  1. Commit and push your changes.
-  2. Your docs will update and be live in moments!
-</Accordion>
-
-## Next steps
-
-Now that you have your docs running, explore these key features:
+Aria is a dual-app system designed for both healthcare providers and patients:
 
 <CardGroup cols={2}>
-
-<Card title="Write Content" icon="pen-to-square" href="/essentials/markdown">
-  Learn MDX syntax and start writing your documentation.
-</Card>
-
-<Card title="Customize style" icon="palette" href="/essentials/settings">
-  Make your docs match your brand perfectly.
-</Card>
-
-<Card title="Add code examples" icon="square-code" href="/essentials/code">
-  Include syntax-highlighted code blocks.
-</Card>
-
-<Card title="API documentation" icon="code" href="/api-reference/introduction">
-  Auto-generate API docs from OpenAPI specs.
-</Card>
-
+  <Card title="Doctor App" icon="stethoscope">
+    Create prescriptions with AI-powered dictation, access complete patient histories, and manage your practice digitally
+  </Card>
+  
+  <Card title="Patient App" icon="mobile-screen">
+    Access all your medical records, prescriptions, and health data in one secure location
+  </Card>
 </CardGroup>
 
+## Platform Overview
+
+### Dual App System
+
+Dedicated apps for doctors and patients with secure role-based access and seamless identity management.
+
+```tsx
+// User type selection from waitlist form
+const userTypes = {
+  doctor: "Healthcare provider creating prescriptions",
+  patient: "Individual managing personal health records",
+  other: "Healthcare organization or related service"
+};
+```
+
+### Digital Prescriptions
+
+Create, view, and manage digital prescriptions with complete history accessible to both doctor and patient anytime.
+
+<Tip>
+  Every prescription includes diagnosis, medications with dosages, and treatment duration - all stored securely in the cloud.
+</Tip>
+
+### Medical Record Management
+
+Patients can upload lab scans, hospital reports, and documents for a richer medical history and better care.
+
+### AI & Analytics Ready
+
+Built for future AI integrations to automatically order medicines, find patterns, and provide intelligent insights.
+
+## Joining the Waitlist
+
+<Steps>
+  <Step title="Visit the Waitlist Page">
+    Navigate to the Aria waitlist page to begin your registration.
+    
+    <Note>
+      The form collects essential information to help us tailor the platform to your needs.
+    </Note>
+  </Step>
+  
+  <Step title="Provide Your Information">
+    Fill in the required details:
+    
+    **Basic Information:**
+    - Full name
+    - Email address
+    - Phone number (with country code)
+    
+    **User Profile:**
+    - Select your primary use case (Doctor, Patient, or Other)
+    
+    ```tsx
+    // User type options
+    <RadioGroup>
+      <RadioGroupItem value="doctor" label="Doctor" />
+      <RadioGroupItem value="patient" label="Patient" />
+      <RadioGroupItem value="other" label="Other" />
+    </RadioGroup>
+    ```
+  </Step>
+  
+  <Step title="Select Features of Interest">
+    Choose which features appeal to you most:
+    
+    - AI-powered features
+    - Access to medical records
+    - ABHA-integration
+    - Appointment scheduling/management
+    - Secure messaging with patients/healthcare providers
+    - Telehealth/virtual consultations
+    
+    <Tip>
+      Selecting multiple features helps us understand your priorities and improve the platform accordingly.
+    </Tip>
+    
+    ```tsx
+    // Feature selection from waitlist form
+    const features = [
+      { id: "ai_features", label: "AI-powered features" },
+      { id: "records", label: "Access to medical records" },
+      { id: "ABHA", label: "ABHA-integration" },
+      { id: "appointment", label: "Appointment scheduling/management" },
+      { id: "messaging", label: "Secure messaging" },
+      { id: "telehealth", label: "Telehealth/virtual consultations" }
+    ];
+    ```
+  </Step>
+  
+  <Step title="Submit Your Application">
+    Click the submit button to join the waitlist.
+    
+    <Info>
+      Your information is securely stored and will only be used to communicate updates about Aria.
+    </Info>
+    
+    Upon successful submission, you'll see:
+    
+    ```tsx
+    toast({
+      title: "You're on the list!",
+      description: "Thanks for joining the Aria Healthcare waitlist. We'll be in touch soon."
+    });
+    ```
+  </Step>
+</Steps>
+
+## What to Expect After Joining
+
+Once you're on the waitlist:
+
+1. **Confirmation**: You'll receive a confirmation that your application was received
+2. **Updates**: We'll keep you informed about development progress
+3. **Early Access**: Priority access when Aria launches
+4. **Beta Testing**: Potential invitation to test features before public release
+
 <Note>
-  **Need help?** See our [full documentation](https://mintlify.com/docs) or join our [community](https://mintlify.com/community).
+  We review all waitlist applications and prioritize healthcare professionals and patients who can benefit most from early access.
 </Note>
+
+## Key Features to Explore
+
+When Aria launches, you'll have access to these powerful features:
+
+### 1. Medical Voice Dictation
+
+Real-time prescription writing through voice with automatic entity recognition.
+
+```tsx
+// Example dictation input
+"Patient complains of fever and headache for 3 days. 
+Prescribing Paracetamol 500mg and Cetirizine 10mg for symptom relief."
+
+// Automatically detected entities:
+// - Symptoms: fever, headache
+// - Medications: Paracetamol 500mg, Cetirizine 10mg
+// - Duration: 3 days
+```
+
+<Tip>
+  The AI recognizes medical terminology, drug names, dosages, and symptoms automatically - no manual tagging needed.
+</Tip>
+
+### 2. Smart Medication Search
+
+Instant medication lookup with ABHA-compliant database:
+
+```tsx
+// Search "croc" returns:
+[
+  { name: "Crocin 500mg", composition: "Paracetamol" },
+  { name: "Crocin 650mg", composition: "Paracetamol" },
+  { name: "Crocin Advance 500mg", composition: "Paracetamol + Caffeine" }
+]
+```
+
+### 3. Complete Patient Timeline
+
+Chronological view of all medical records:
+
+- Prescriptions with full diagnosis details
+- Lab reports and test results
+- Imaging and radiology reports
+- Hospital discharge summaries
+- Patient-uploaded documents
+
+<Warning>
+  All medical data is encrypted and complies with healthcare data protection regulations.
+</Warning>
+
+### 4. AI-Aided Diagnosis
+
+Get intelligent diagnosis suggestions based on:
+
+- Current symptoms/complaints
+- Complete patient medical history
+- Prescription patterns
+- Lab test results
+
+```tsx
+// Example AI diagnosis output
+{
+  diagnosis: "Viral Fever (URI)",
+  confidence: 87,
+  reasoning: "Symptoms align with recent prescription history (Paracetamol, Dec 15). 
+             Seasonal pattern noted."
+}
+```
+
+### 5. Patient Health Assistant
+
+RAG-powered chatbot for instant patient information:
+
+**Example Queries:**
+- "Give me a summary of Sarah's health"
+- "Any drug allergies?"
+- "What medications is this patient currently taking?"
+- "Show me recent lab results"
+
+<Tip>
+  The AI assistant retrieves information from the complete medical history and presents it in a conversational format.
+</Tip>
+
+## ABHA Integration
+
+Aria integrates seamlessly with India's Ayushman Bharat Health Account (ABHA) system:
+
+<CardGroup cols={2}>
+  <Card title="Unified Identity" icon="id-card">
+    Link your ABHA ID to access records across healthcare providers
+  </Card>
+  
+  <Card title="Interoperability" icon="arrows-rotate">
+    Share records with any ABDM-compliant healthcare facility
+  </Card>
+  
+  <Card title="Consent Management" icon="shield-check">
+    Full control over who accesses your medical data
+  </Card>
+  
+  <Card title="National Standards" icon="flag">
+    Compliant with India's digital health ecosystem
+  </Card>
+</CardGroup>
+
+Learn more about ABHA: [https://abha.abdm.gov.in/abha/v3](https://abha.abdm.gov.in/abha/v3)
+
+## Technical Foundation
+
+Aria is built on modern, secure technologies:
+
+```tsx
+// Core technology stack
+{
+  frontend: "Next.js 16 with React 18",
+  language: "TypeScript for type safety",
+  database: "Supabase (PostgreSQL)",
+  authentication: "Supabase Auth with role-based access",
+  ui: "shadcn/ui + Radix UI primitives",
+  forms: "React Hook Form + Zod validation",
+  styling: "Tailwind CSS",
+  animations: "Framer Motion"
+}
+```
+
+## Contact & Support
+
+Have questions or want to learn more?
+
+<CardGroup cols={2}>
+  <Card title="Email Us" icon="envelope">
+    Reach out at kushal@ariamed.ai
+  </Card>
+  
+  <Card title="Join Waitlist" icon="user-plus">
+    Sign up for early access
+  </Card>
+</CardGroup>
+
+## Next Steps
+
+<Steps>
+  <Step title="Join the Waitlist">
+    Complete the waitlist form to secure your spot
+  </Step>
+  
+  <Step title="Learn About ABHA">
+    Understand how ABHA integration benefits you: [ABHA Documentation](https://abha.abdm.gov.in/abha/v3)
+  </Step>
+  
+  <Step title="Stay Updated">
+    Watch for email updates about launch dates and beta testing opportunities
+  </Step>
+  
+  <Step title="Spread the Word">
+    Share Aria with healthcare professionals and patients who could benefit
+  </Step>
+</Steps>
+
+<Info>
+  Aria is transforming healthcare in India - one digital prescription at a time. Join us on this journey!
+</Info>
+
+## Frequently Asked Questions
+
+<AccordionGroup>
+  <Accordion title="Who can use Aria?">
+    Aria is designed for both healthcare providers (doctors, clinics) and patients. Healthcare providers use it to create and manage digital prescriptions, while patients use it to access and manage their complete medical history.
+  </Accordion>
+  
+  <Accordion title="Is Aria ABHA-compliant?">
+    Yes! Aria is built to integrate seamlessly with India's Ayushman Bharat Digital Mission (ABDM) and supports ABHA-linked health records for full interoperability across the healthcare ecosystem.
+  </Accordion>
+  
+  <Accordion title="How secure is my medical data?">
+    Security is our top priority. All medical data is encrypted, stored securely, and complies with healthcare data protection regulations. Access is role-based and requires proper authentication.
+  </Accordion>
+  
+  <Accordion title="Can I upload existing medical records?">
+    Yes! Patients can upload lab scans, hospital reports, imaging results, and any other medical documents to build a complete digital health record.
+  </Accordion>
+  
+  <Accordion title="What makes Aria different from other EMR systems?">
+    Aria combines AI-powered features (voice dictation, smart medication search, AI-aided diagnosis) with ABHA integration and a patient-first approach. It's designed specifically for India's healthcare ecosystem with features like 100,000+ ABHA-compliant medication database.
+  </Accordion>
+  
+  <Accordion title="When will Aria launch?">
+    We're currently in development. Join the waitlist to be notified about launch dates and early access opportunities.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+Ready to transform healthcare? Join the waitlist today!

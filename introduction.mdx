@@ -1,0 +1,197 @@
+---
+title: "Welcome to Aria"
+description: "A unified digital healthcare platform connecting doctors and patients through ABHA-integrated digital prescriptions"
+---
+
+# Enhance your clinical workflows with EMR-integrated AI
+
+Aria is a unified digital healthcare platform that transforms the doctor-patient relationship in India through secure, ABHA-integrated digital prescriptions and complete medical history management.
+
+<Info>
+  ABHA-linked digital prescriptions empower doctors and patients with complete medical history visibility, eliminating the problems of lost records and fragmented care.
+</Info>
+
+## The Problem We're Solving
+
+In India, most prescriptions are still physical with no digital footprint, creating critical healthcare challenges:
+
+<CardGroup cols={2}>
+  <Card title="Lost Prescriptions" icon="file-xmark">
+    Physical prescriptions disappear. The entire diagnosis becomes inaccessible when paper gets lost or damaged.
+  </Card>
+  
+  <Card title="Doctor Liability" icon="shield-alert">
+    Without digital records, doctors bear unnecessary legal risk in cases of mishaps or disputes.
+  </Card>
+  
+  <Card title="No Medical History" icon="clock-rotate-left">
+    Doctors lack access to patient history, making informed decisions difficult and time-consuming.
+  </Card>
+  
+  <Card title="Drug Interaction Risks" icon="triangle-exclamation">
+    No tracking of current medications increases the chance of dangerous drug interactions.
+  </Card>
+</CardGroup>
+
+## Core Features
+
+Aria provides powerful features for modern healthcare delivery in India:
+
+### AI-Powered Smart Dictation
+
+Speak naturally to create prescriptions. Our AI automatically identifies medications, dosages, symptoms, and medical terminology as you dictate.
+
+<Tip>
+  The voice dictation feature includes real-time entity recognition for medications and symptoms, automatically structuring your prescriptions as you speak.
+</Tip>
+
+Example from our codebase showing entity detection:
+
+```tsx
+// Automatic entity detection during dictation
+const detected: { text: string; type: "medication" | "symptom" }[] = [];
+
+if (newText.includes("fever")) {
+  detected.push({ text: "fever", type: "symptom" });
+}
+if (newText.includes("Paracetamol")) {
+  detected.push({ text: "Paracetamol 500mg", type: "medication" });
+}
+```
+
+### Smart Medication Search
+
+Type just a few letters to instantly search our ABHA-compliant database of 100,000+ medications. Get dosage options, composition details, and add to prescriptions with one click.
+
+```tsx
+// Example medication search options
+const medicationOptions = [
+  { name: "Crocin 500mg", dosage: "500mg", composition: "Paracetamol" },
+  { name: "Crocin 650mg", dosage: "650mg", composition: "Paracetamol" },
+  { name: "Crocin Advance 500mg", dosage: "500mg", composition: "Paracetamol + Caffeine" },
+];
+```
+
+### Complete Patient Timeline
+
+View every prescription, lab report, and medical record in one chronological timeline. Never miss critical patient history again.
+
+<Note>
+  The aggregated history feature provides a unified view of all medical records, prescriptions, and lab reports, enabling comprehensive patient care.
+</Note>
+
+### AI-Aided Diagnosis
+
+Enter patient complaints and get intelligent diagnosis suggestions based on symptoms AND complete patient history. AI cross-references medical records for accurate recommendations.
+
+```tsx
+// AI diagnosis with confidence scoring
+const diagnosisResults = [
+  {
+    diagnosis: "Viral Fever (URI)",
+    confidence: 87,
+    reasoning: "Symptoms align with recent prescription history. Seasonal pattern noted."
+  },
+  {
+    diagnosis: "Influenza Type B",
+    confidence: 68,
+    reasoning: "High fever with body aches. No recent flu vaccination in records."
+  }
+];
+```
+
+### Patient Health Assistant
+
+Ask questions about any patient and get instant answers from their complete medical history. RAG-powered AI retrieves and summarizes information in seconds.
+
+<Tip>
+  The RAG (Retrieval Augmented Generation) chatbot can answer questions like "Give me a summary of Sarah's health" or "Any drug allergies?" using the patient's complete medical history.
+</Tip>
+
+## Platform Benefits
+
+<CardGroup cols={2}>
+  <Card title="For Doctors" icon="user-doctor" href="#for-doctors">
+    Designed for clinical flow with AI-powered insights
+  </Card>
+  
+  <Card title="For Patients" icon="users" href="#for-patients">
+    Clarity across your care journey
+  </Card>
+  
+  <Card title="ABHA Integration" icon="link" href="#abha-integration">
+    Seamless ABDM ecosystem connectivity
+  </Card>
+  
+  <Card title="Digital Records" icon="folder-open" href="#digital-records">
+    Complete record management and sharing
+  </Card>
+</CardGroup>
+
+### For Doctors
+
+Designed for clinical flow:
+
+- Reduce paperwork and administrative burden
+- Enhance diagnosis with instant patient history and AI-powered insights
+- Streamline patient communication and follow-ups
+- Seamless ABHA & ABDM Integration
+
+### For Patients
+
+Clarity across your care:
+
+- Access your complete medical history anytime, anywhere
+- Never lose a prescription or medical record again
+- Share records easily with any healthcare provider
+- Track medications and treatment progress digitally
+- Upload and digitize old medical records and lab reports
+
+## Key Statistics
+
+<CardGroup cols={3}>
+  <Card title="100%" icon="check">
+    Digital prescription management
+  </Card>
+  
+  <Card title="∞" icon="infinity">
+    Always accessible records
+  </Card>
+  
+  <Card title="0" icon="ban">
+    Lost records ever
+  </Card>
+</CardGroup>
+
+## Technology Stack
+
+Aria is built with modern technologies:
+
+- **Frontend**: Next.js 16, React 18, TypeScript
+- **UI Components**: shadcn/ui with Radix UI primitives
+- **Animation**: Framer Motion for smooth interactions
+- **Backend**: Supabase for database and authentication
+- **Form Handling**: React Hook Form with Zod validation
+- **Styling**: Tailwind CSS with custom design system
+
+## Learn More About ABHA
+
+<Card title="ABHA Documentation" icon="book" href="https://abha.abdm.gov.in/abha/v3">
+  Understand the Ayushman Bharat Health Account (ABHA) integration that powers Aria's unified health records
+</Card>
+
+<Warning>
+  Aria handles sensitive medical data. All features are built with security and ABDM compliance in mind.
+</Warning>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Quickstart Guide" icon="rocket" href="/quickstart">
+    Get started with Aria in minutes
+  </Card>
+  
+  <Card title="Join Waitlist" icon="envelope">
+    Be among the first to experience Aria
+  </Card>
+</CardGroup>

@@ -1,0 +1,696 @@
+---
+title: 'API Reference'
+description: 'Complete API documentation for Aria Healthcare platform'
+---
+
+## Overview
+
+Aria Healthcare uses Supabase as its backend platform, providing RESTful APIs, real-time subscriptions, authentication, and file storage. All APIs are accessed through the Supabase client with TypeScript type safety.
+
+## Getting Started
+
+### Supabase Client Setup
+
+<CodeGroup>
+```typescript src/integrations/supabase/client.ts
+import { createClient } from '@supabase/supabase-js';
+
+// Environment variables
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.error('Missing Supabase environment variables');
+}
+
+// Create singleton client instance
+export const supabase = createClient(
+  supabaseUrl || 'https://placeholder.supabase.co',
+  supabaseAnonKey || 'placeholder',
+);
+```
+
+```typescript Usage in Components
+import { supabase } from '@/integrations/supabase/client';
+
+// Use in your components
+const { data, error } = await supabase
+  .from('waitlist')
+  .select('*');
+```
+</CodeGroup>
+
+### Environment Variables
+
+<ParamField path="NEXT_PUBLIC_SUPABASE_URL" type="string" required>
+  Your Supabase project URL (e.g., `https://xxxxx.supabase.co`)
+</ParamField>
+
+<ParamField path="NEXT_PUBLIC_SUPABASE_ANON_KEY" type="string" required>
+  Your Supabase anonymous/public API key for client-side usage
+</ParamField>
+
+<ParamField path="VITE_SUPABASE_URL" type="string">
+  Alternative environment variable for Vite compatibility
+</ParamField>
+
+<ParamField path="VITE_SUPABASE_ANON_KEY" type="string">
+  Alternative environment variable for Vite compatibility
+</ParamField>
+
+## Authentication API
+
+### Sign Up
+
+Create a new user account with email and password.
+
+<CodeGroup>
+```typescript Sign Up
+const { data, error } = await supabase.auth.signUp({
+  email: 'user@example.com',
+  password: 'secure-password',
+  options: {
+    data: {
+      name: 'Dr. John Doe',
+      user_type: 'doctor',
+    },
+  },
+});
+
+if (error) {
+  console.error('Sign up error:', error.message);
+} else {
+  console.log('User created:', data.user);
+}
+```
+</CodeGroup>
+
+<ParamField body="email" type="string" required>
+  User's email address
+</ParamField>
+
+<ParamField body="password" type="string" required>
+  User's password (minimum 6 characters)
+</ParamField>
+
+<ParamField body="options.data" type="object">
+  Additional user metadata (e.g., name, user_type)
+</ParamField>
+
+<ResponseField name="data.user" type="object">
+  User object containing id, email, and metadata
+</ResponseField>
+
+<ResponseField name="data.session" type="object">
+  Session object with access_token and refresh_token
+</ResponseField>
+
+### Sign In
+
+Authenticate an existing user.
+
+<CodeGroup>
+```typescript Sign In
+const { data, error } = await supabase.auth.signInWithPassword({
+  email: 'user@example.com',
+  password: 'secure-password',
+});
+
+if (error) {
+  console.error('Sign in error:', error.message);
+} else {
+  console.log('Session:', data.session);
+}
+```
+</CodeGroup>
+
+### Sign Out
+
+End the current user session.
+
+<CodeGroup>
+```typescript Sign Out
+const { error } = await supabase.auth.signOut();
+
+if (error) {
+  console.error('Sign out error:', error.message);
+}
+```
+</CodeGroup>
+
+### Get Current User
+
+Retrieve the currently authenticated user.
+
+<CodeGroup>
+```typescript Get User
+const { data: { user } } = await supabase.auth.getUser();
+
+if (user) {
+  console.log('Current user:', user.email);
+} else {
+  console.log('No user signed in');
+}
+```
+</CodeGroup>
+
+### Session Management
+
+Handle authentication state changes.
+
+<CodeGroup>
+```typescript Auth State Listener
+supabase.auth.onAuthStateChange((event, session) => {
+  console.log('Auth event:', event);
+  
+  switch (event) {
+    case 'SIGNED_IN':
+      console.log('User signed in:', session?.user.email);
+      break;
+    case 'SIGNED_OUT':
+      console.log('User signed out');
+      break;
+    case 'TOKEN_REFRESHED':
+      console.log('Token refreshed');
+      break;
+  }
+});
+```
+</CodeGroup>
+
+## Database API
+
+### Waitlist Table
+
+Manage waitlist entries for new users.
+
+#### Insert Waitlist Entry
+
+<CodeGroup>
+```typescript app/waitlist/page.tsx
+import { supabase } from '@/integrations/supabase/client';
+import { customList } from 'country-codes-list';
+
+async function submitWaitlist(values: WaitlistForm) {
+  // Format phone number with country code
+  const callingCodes = customList('countryCode', '+{countryCallingCode}');
+  const callingCode = callingCodes[values.phoneNumberCountryCode];
+  const fullPhoneNumber = `${callingCode} ${values.phoneNumber}`;
+  
+  const { data, error } = await supabase
+    .from('waitlist')
+    .insert({
+      name: values.name,
+      user_type: values.userType,
+      user_type_other: values.userTypeOther,
+      phone_number: fullPhoneNumber,
+      email: values.email,
+      features: values.features,
+      features_other: values.featuresOther,
+      source: values.source,
+      source_other: values.sourceOther,
+    })
+    .select();
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data;
+}
+```
+</CodeGroup>
+
+<ParamField body="name" type="string" required>
+  User's full name
+</ParamField>
+
+<ParamField body="user_type" type="enum" required>
+  Type of user: `doctor`, `patient`, or `other`
+</ParamField>
+
+<ParamField body="user_type_other" type="string">
+  Specification if user_type is `other`
+</ParamField>
+
+<ParamField body="phone_number" type="string" required>
+  Phone number with country code (e.g., `+91 9876543210`)
+</ParamField>
+
+<ParamField body="email" type="string" required>
+  User's email address
+</ParamField>
+
+<ParamField body="features" type="array<string>" required>
+  Array of interested features: `ai_features`, `records`, `ABHA`, `appointment`, `messaging`, `telehealth`, `other`
+</ParamField>
+
+<ParamField body="features_other" type="string">
+  Specification if features includes `other`
+</ParamField>
+
+<ParamField body="source" type="enum" required>
+  How they heard about Aria: `search_engine`, `social_media`, `recommendation`, `word_of_mouth`, `other`
+</ParamField>
+
+<ParamField body="source_other" type="string">
+  Specification if source is `other`
+</ParamField>
+
+<ResponseField name="data" type="array">
+  Array containing the inserted waitlist entry with auto-generated `id` and `created_at` fields
+</ResponseField>
+
+#### Query Waitlist Entries
+
+<CodeGroup>
+```typescript Select All
+const { data, error } = await supabase
+  .from('waitlist')
+  .select('*');
+```
+
+```typescript Filter by User Type
+const { data, error } = await supabase
+  .from('waitlist')
+  .select('*')
+  .eq('user_type', 'doctor');
+```
+
+```typescript Pagination
+const { data, error } = await supabase
+  .from('waitlist')
+  .select('*')
+  .range(0, 9) // First 10 records
+  .order('created_at', { ascending: false });
+```
+</CodeGroup>
+
+### Patient Records Table
+
+Manage patient medical records (example schema).
+
+#### Create Patient Record
+
+<CodeGroup>
+```typescript Insert Patient Record
+const { data, error } = await supabase
+  .from('patient_records')
+  .insert({
+    patient_id: 'uuid-here',
+    abha_number: '12345678901234',
+    abha_address: 'patient@abdm',
+    doctor_id: 'doctor-uuid',
+    diagnosis: 'Hypertension',
+    prescription: [
+      {
+        medication: 'Amlodipine',
+        dosage: '5mg',
+        frequency: 'Once daily',
+        duration: '30 days',
+      },
+    ],
+    notes: 'Patient advised lifestyle modifications',
+    visit_date: new Date().toISOString(),
+  })
+  .select();
+```
+</CodeGroup>
+
+<ParamField body="patient_id" type="uuid" required>
+  Unique identifier for the patient
+</ParamField>
+
+<ParamField body="abha_number" type="string">
+  14-digit ABHA number
+</ParamField>
+
+<ParamField body="abha_address" type="string">
+  ABHA address (e.g., `patient@abdm`)
+</ParamField>
+
+<ParamField body="doctor_id" type="uuid" required>
+  Unique identifier for the treating doctor
+</ParamField>
+
+<ParamField body="diagnosis" type="string" required>
+  Medical diagnosis
+</ParamField>
+
+<ParamField body="prescription" type="array<object>">
+  Array of prescribed medications with dosage details
+</ParamField>
+
+<ParamField body="notes" type="string">
+  Additional clinical notes
+</ParamField>
+
+<ParamField body="visit_date" type="timestamp" required>
+  Date and time of the visit
+</ParamField>
+
+#### Query Patient Records
+
+<CodeGroup>
+```typescript Get Patient's Records
+const { data, error } = await supabase
+  .from('patient_records')
+  .select('*')
+  .eq('patient_id', patientId)
+  .order('visit_date', { ascending: false });
+```
+
+```typescript Get Records with Doctor Info
+const { data, error } = await supabase
+  .from('patient_records')
+  .select(`
+    *,
+    doctor:doctors(name, specialization, license_number)
+  `)
+  .eq('patient_id', patientId);
+```
+</CodeGroup>
+
+## Real-time Subscriptions
+
+Listen to database changes in real-time.
+
+<CodeGroup>
+```typescript Subscribe to New Records
+const channel = supabase
+  .channel('patient_records_changes')
+  .on(
+    'postgres_changes',
+    {
+      event: 'INSERT',
+      schema: 'public',
+      table: 'patient_records',
+      filter: `patient_id=eq.${patientId}`,
+    },
+    (payload) => {
+      console.log('New record:', payload.new);
+      // Update UI with new record
+    }
+  )
+  .subscribe();
+
+// Cleanup
+return () => {
+  supabase.removeChannel(channel);
+};
+```
+
+```typescript React Query Integration
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+
+function usePatientRecords(patientId: string) {
+  const queryClient = useQueryClient();
+
+  // Subscribe to real-time updates
+  useEffect(() => {
+    const channel = supabase
+      .channel('records')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'patient_records',
+          filter: `patient_id=eq.${patientId}`,
+        },
+        () => {
+          // Invalidate and refetch
+          queryClient.invalidateQueries(['patient-records', patientId]);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [patientId, queryClient]);
+
+  // Query patient records
+  return useQuery({
+    queryKey: ['patient-records', patientId],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('patient_records')
+        .select('*')
+        .eq('patient_id', patientId);
+
+      if (error) throw error;
+      return data;
+    },
+  });
+}
+```
+</CodeGroup>
+
+<Note>
+  Real-time subscriptions automatically handle reconnection and are optimized for low latency.
+</Note>
+
+## Storage API
+
+Upload and manage medical records, images, and documents.
+
+### Upload File
+
+<CodeGroup>
+```typescript Upload Medical Record
+const file = event.target.files[0];
+const fileExt = file.name.split('.').pop();
+const fileName = `${patientId}/${Date.now()}.${fileExt}`;
+
+const { data, error } = await supabase.storage
+  .from('medical-records')
+  .upload(fileName, file, {
+    cacheControl: '3600',
+    upsert: false,
+  });
+
+if (error) {
+  console.error('Upload error:', error);
+} else {
+  console.log('File uploaded:', data.path);
+}
+```
+</CodeGroup>
+
+### Get File URL
+
+<CodeGroup>
+```typescript Get Public URL
+const { data } = supabase.storage
+  .from('medical-records')
+  .getPublicUrl(filePath);
+
+console.log('File URL:', data.publicUrl);
+```
+
+```typescript Get Signed URL (Private)
+const { data, error } = await supabase.storage
+  .from('medical-records')
+  .createSignedUrl(filePath, 3600); // Expires in 1 hour
+
+if (data) {
+  console.log('Signed URL:', data.signedUrl);
+}
+```
+</CodeGroup>
+
+### Delete File
+
+<CodeGroup>
+```typescript Delete File
+const { data, error } = await supabase.storage
+  .from('medical-records')
+  .remove([filePath]);
+
+if (error) {
+  console.error('Delete error:', error);
+}
+```
+</CodeGroup>
+
+## Error Handling
+
+All Supabase operations return an error object when something goes wrong.
+
+<CodeGroup>
+```typescript Error Handling Pattern
+const { data, error } = await supabase
+  .from('waitlist')
+  .insert({ name: 'Test' });
+
+if (error) {
+  // Handle specific error codes
+  switch (error.code) {
+    case '23505': // Unique violation
+      console.error('Duplicate entry');
+      break;
+    case '42501': // Insufficient privileges
+      console.error('Permission denied');
+      break;
+    default:
+      console.error('Error:', error.message);
+  }
+  
+  throw error;
+}
+
+return data;
+```
+
+```typescript With Try-Catch
+async function safeQuery() {
+  try {
+    const { data, error } = await supabase
+      .from('patient_records')
+      .select('*');
+
+    if (error) throw error;
+    return data;
+  } catch (err) {
+    console.error('Query failed:', err);
+    // Show user-friendly error message
+    toast({
+      title: 'Error loading records',
+      description: 'Please try again later',
+      variant: 'destructive',
+    });
+    return [];
+  }
+}
+```
+</CodeGroup>
+
+## Type Safety
+
+Supabase client can be configured with TypeScript types for your database schema.
+
+<CodeGroup>
+```typescript Database Types
+// Generated from Supabase CLI
+export type Database = {
+  public: {
+    Tables: {
+      waitlist: {
+        Row: {
+          id: string;
+          name: string;
+          email: string;
+          phone_number: string;
+          user_type: 'doctor' | 'patient' | 'other';
+          features: string[];
+          created_at: string;
+        };
+        Insert: Omit<Database['public']['Tables']['waitlist']['Row'], 'id' | 'created_at'>;
+        Update: Partial<Database['public']['Tables']['waitlist']['Insert']>;
+      };
+    };
+  };
+};
+
+// Create typed client
+import { createClient } from '@supabase/supabase-js';
+import type { Database } from './database.types';
+
+export const supabase = createClient<Database>(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
+
+// Now you get full type safety
+const { data } = await supabase.from('waitlist').select('*');
+// data is typed as Database['public']['Tables']['waitlist']['Row'][]
+```
+</CodeGroup>
+
+<Warning>
+  Always validate and sanitize user input before inserting into the database, even with TypeScript types.
+</Warning>
+
+## Rate Limits
+
+Supabase implements rate limiting to prevent abuse:
+
+- **Authentication**: 30 requests per hour per IP
+- **Database queries**: 100 requests per second
+- **Storage uploads**: 100 requests per second
+- **Real-time connections**: 500 concurrent connections per project
+
+<Note>
+  Contact Supabase support for increased rate limits on production applications.
+</Note>
+
+## Best Practices
+
+1. **Use React Query for Data Fetching**
+   - Automatic caching and background refetching
+   - Optimistic updates for better UX
+   - Error and loading state management
+
+2. **Implement Row-Level Security**
+   - Always enable RLS on tables with sensitive data
+   - Use policies to restrict access based on user roles
+
+3. **Use Database Functions**
+   - Complex business logic in PostgreSQL functions
+   - Better performance than client-side processing
+
+4. **Handle Errors Gracefully**
+   - Show user-friendly error messages
+   - Log detailed errors for debugging
+   - Implement retry logic for transient failures
+
+5. **Optimize Queries**
+   - Select only needed columns
+   - Use indexes for frequently queried fields
+   - Implement pagination for large datasets
+
+<CodeGroup>
+```typescript React Query Best Practice
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { supabase } from '@/integrations/supabase/client';
+
+// Fetch data with React Query
+function useWaitlist() {
+  return useQuery({
+    queryKey: ['waitlist'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('waitlist')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      return data;
+    },
+    staleTime: 5 * 60 * 1000, // 5 minutes
+  });
+}
+
+// Mutate data with optimistic updates
+function useAddToWaitlist() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (values: WaitlistForm) => {
+      const { data, error } = await supabase
+        .from('waitlist')
+        .insert(values)
+        .select();
+
+      if (error) throw error;
+      return data[0];
+    },
+    onSuccess: () => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries({ queryKey: ['waitlist'] });
+    },
+  });
+}
+```
+</CodeGroup>

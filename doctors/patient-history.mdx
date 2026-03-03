@@ -1,0 +1,410 @@
+---
+title: "Patient History & Timeline"
+description: "Access complete patient medical records with ABHA-linked aggregated history in a single chronological view"
+---
+
+## Complete Patient Timeline
+
+View every prescription, lab report, imaging study, and medical record in one unified chronological timeline. Never miss critical patient history again.
+
+<Info>
+  All records are automatically aggregated from the patient's ABHA account, including prescriptions from other doctors, uploaded lab reports, and historical medical documents.
+</Info>
+
+## Patient History Overview
+
+When you open a patient's profile, you see:
+
+### Patient Summary Card
+
+<Tabs>
+  <Tab title="Demographics">
+    - Full name and ABHA ID
+    - Age and gender
+    - Medical record number
+    - Active patient status
+  </Tab>
+  <Tab title="Conditions">
+    - Active chronic conditions (Hypertension, Diabetes, etc.)
+    - Condition onset dates
+    - Management status
+  </Tab>
+  <Tab title="Allergies">
+    - Known drug allergies
+    - Severity level
+    - Reaction details
+  </Tab>
+  <Tab title="Active Medications">
+    - Currently prescribed medications
+    - Dosage and frequency
+    - Prescribing doctor
+    - Start date
+  </Tab>
+</Tabs>
+
+<Warning>
+  Always check the allergies section before prescribing. Drug allergies are prominently displayed in the patient summary for safety.
+</Warning>
+
+## Medical Timeline
+
+The timeline shows all medical events in reverse chronological order (most recent first):
+
+### Timeline Entry Types
+
+<CardGroup cols={2}>
+  <Card title="Prescriptions" icon="file-text">
+    Digital prescriptions from any ABHA-linked doctor
+    
+    **Includes:**
+    - Diagnosis
+    - Prescribed medications with dosages
+    - Duration and instructions
+    - Prescribing doctor details
+  </Card>
+  <Card title="Lab Reports" icon="flask">
+    Laboratory test results uploaded by patient or lab
+    
+    **Includes:**
+    - Test type (CBC, LFT, KFT, etc.)
+    - Test date
+    - Key values and reference ranges
+    - PDF report attachment
+  </Card>
+  <Card title="Imaging Reports" icon="scan">
+    X-rays, CT scans, MRI, ultrasound reports
+    
+    **Includes:**
+    - Imaging modality
+    - Body part/region
+    - Radiologist findings
+    - Image files (if uploaded)
+  </Card>
+  <Card title="Medical Documents" icon="paperclip">
+    Patient-uploaded historical records
+    
+    **Includes:**
+    - Hospital discharge summaries
+    - Specialist consultation notes
+    - Vaccination records
+    - Any other medical documents
+  </Card>
+</CardGroup>
+
+## Viewing Timeline Entries
+
+Each timeline entry can be expanded to view full details:
+
+<Steps>
+  <Step title="Scan the timeline">
+    Quickly scan entry types and dates in the collapsed view
+  </Step>
+  <Step title="Tap to expand">
+    Click any entry to see full details
+  </Step>
+  <Step title="Review information">
+    Read complete diagnosis, medications, test results, or report findings
+  </Step>
+  <Step title="Download if needed">
+    Download PDF reports or images for closer examination
+  </Step>
+</Steps>
+
+### Example: Prescription Entry
+
+When you expand a prescription entry, you see:
+
+<Accordion title="Expanded Prescription Details">
+  **Diagnosis:**
+  Acute Upper Respiratory Infection
+  
+  **Symptoms:**
+  Fever (99.8°F), cough, sore throat, nasal congestion
+  
+  **Prescribed Medications:**
+  - 💊 **Paracetamol 500mg**: 1 tablet, twice daily after meals
+  - 💊 **Cetirizine 10mg**: 1 tablet, once daily before bedtime
+  
+  **Duration:** 5 days
+  
+  **Prescribed by:** Dr. Rajesh Kumar (Dec 15, 2025)
+</Accordion>
+
+## Patient Health Assistant (RAG Chatbot)
+
+Quickly query patient history using natural language instead of manually scrolling through the timeline.
+
+<Info>
+  The RAG (Retrieval-Augmented Generation) chatbot analyzes the patient's complete medical history and answers your questions instantly.
+</Info>
+
+### How to Use
+
+<Steps>
+  <Step title="Open chat interface">
+    Click the "Ask about patient" button in the patient profile
+  </Step>
+  <Step title="Type your question">
+    Ask in natural language - no need for specific query formats
+  </Step>
+  <Step title="Get instant answers">
+    AI retrieves relevant information from the patient's complete history and summarizes it
+  </Step>
+</Steps>
+
+### Example Queries
+
+<Tabs>
+  <Tab title="Health Summary">
+    **You ask:** 
+    ```
+    Give me a summary of Sarah's health
+    ```
+    
+    **AI responds:**
+    ```
+    Based on Sarah Johnson's records: She's a 34-year-old with 
+    recent URI symptoms. Last prescribed Paracetamol 500mg on 
+    Dec 15. Lab reports from Dec 10 show normal CBC. Previous 
+    history includes seasonal allergies. No chronic conditions. 
+    Overall healthy profile with occasional viral infections.
+    ```
+  </Tab>
+  <Tab title="Allergy Check">
+    **You ask:**
+    ```
+    Any drug allergies?
+    ```
+    
+    **AI responds:**
+    ```
+    No documented drug allergies in Sarah Johnson's medical 
+    history. She has tolerated Paracetamol, Cetirizine, and 
+    common antibiotics well in past prescriptions.
+    ```
+  </Tab>
+  <Tab title="Medication History">
+    **You ask:**
+    ```
+    What medications was she prescribed in the last 3 months?
+    ```
+    
+    **AI responds:**
+    ```
+    Last 3 months medication history:
+    - Paracetamol 500mg (Dec 15) - for fever
+    - Cetirizine 10mg (Dec 15) - for URI symptoms
+    - Azithromycin 500mg (Nov 20) - 3-day course
+    - Lisinopril 10mg (ongoing) - for hypertension management
+    ```
+  </Tab>
+  <Tab title="Test Results">
+    **You ask:**
+    ```
+    Latest blood sugar levels?
+    ```
+    
+    **AI responds:**
+    ```
+    Most recent lab report (Dec 10, 2025):
+    - Fasting blood sugar: 98 mg/dL (Normal)
+    - HbA1c: 5.4% (Normal)
+    - No diabetes indicators. Values within healthy range.
+    ```
+  </Tab>
+</Tabs>
+
+<Tip>
+  Use the chatbot during consultations to quickly verify patient information without interrupting your workflow.
+</Tip>
+
+## AI-Aided Diagnosis
+
+Get intelligent diagnosis suggestions based on patient complaints cross-referenced with their complete medical history.
+
+### How It Works
+
+<Steps>
+  <Step title="Enter chief complaints">
+    Type or dictate the patient's symptoms and complaints
+  </Step>
+  <Step title="AI analyzes">
+    System analyzes symptoms against patient's medical history
+  </Step>
+  <Step title="Get suggestions">
+    Receive ranked diagnosis suggestions with confidence scores and reasoning
+  </Step>
+  <Step title="Review and decide">
+    Use AI suggestions to inform your clinical decision-making
+  </Step>
+</Steps>
+
+### Example Diagnosis Flow
+
+<Accordion title="Complete AI Diagnosis Example">
+  **Patient:** Sarah Johnson (34F)
+  
+  **Chief Complaints Entered:**
+  "Fever (101°F), severe headache, body aches, fatigue for 3 days"
+  
+  **AI Analysis:**
+  
+  Analyzing with patient history... Cross-referencing symptoms with Sarah's medical records
+  
+  **AI Diagnosis Suggestions:**
+  
+  1. **Viral Fever (URI)** - 87% confidence
+     - Symptoms align with recent prescription history (Paracetamol, Dec 15)
+     - Seasonal pattern noted in patient's history
+     - Previous URI episodes with similar presentation
+  
+  2. **Influenza Type B** - 68% confidence
+     - High fever with body aches typical of influenza
+     - No recent flu vaccination in records
+     - Consider PCR test for confirmation
+</Accordion>
+
+<Warning>
+  AI diagnosis suggestions are assistive tools, not replacements for clinical judgment. Always consider the complete clinical picture and use your medical expertise for final diagnosis.
+</Warning>
+
+## Cross-Provider History
+
+One of the most powerful features of ABHA integration:
+
+<CardGroup cols={2}>
+  <Card title="See All Providers" icon="users">
+    View prescriptions and records from every doctor the patient has visited
+  </Card>
+  <Card title="Complete Picture" icon="puzzle">
+    Get the full medical story, not just what happened in your clinic
+  </Card>
+  <Card title="Continuity of Care" icon="link">
+    Make better decisions with complete historical context
+  </Card>
+  <Card title="No Duplication" icon="shield-check">
+    Avoid redundant tests and conflicting treatments
+  </Card>
+</CardGroup>
+
+<Info>
+  This is only possible because of ABHA integration. Traditional EMRs only show records created within that system.
+</Info>
+
+## Patient-Uploaded Records
+
+Patients can upload their historical medical documents:
+
+### What Patients Can Upload
+
+- Scanned paper prescriptions from before ABHA era
+- Lab test reports (blood work, urine tests, etc.)
+- Hospital discharge summaries
+- Specialist consultation notes
+- Vaccination certificates
+- Medical imaging CDs (X-ray, CT, MRI)
+- Health checkup reports
+
+<Note>
+  Uploaded documents are OCR-processed where possible to extract structured data, making them searchable via the Patient Health Assistant.
+</Note>
+
+### Document Verification
+
+Patient-uploaded documents are marked with:
+- Upload date
+- Document source (patient-uploaded vs. provider-submitted)
+- Verification status (if verified by a healthcare provider)
+
+## Timeline Filters & Search
+
+Quickly find specific information:
+
+<Tabs>
+  <Tab title="Filter by Type">
+    - All records
+    - Prescriptions only
+    - Lab reports only
+    - Imaging reports only
+    - Uploaded documents only
+  </Tab>
+  <Tab title="Filter by Date Range">
+    - Last 7 days
+    - Last 30 days
+    - Last 3 months
+    - Last 6 months
+    - Last year
+    - All time
+    - Custom date range
+  </Tab>
+  <Tab title="Search">
+    - Search by medication name
+    - Search by diagnosis
+    - Search by prescribing doctor
+    - Search by test type
+    - Full-text search in reports
+  </Tab>
+</Tabs>
+
+## Critical Alerts
+
+The system automatically highlights important information:
+
+<Warning>
+  **Critical Alerts:**
+  - Drug allergies (always shown prominently)
+  - Recent hospitalizations
+  - Abnormal lab values outside reference range
+  - Drug-drug interaction warnings when prescribing
+</Warning>
+
+## Privacy & Consent
+
+<Info>
+  Patients control their ABHA data sharing. They must grant explicit consent for you to access their medical history. This consent can be granted per-visit or ongoing.
+</Info>
+
+### Consent Status
+
+- **Active Consent**: You can view full history
+- **Limited Consent**: You can only view specific records
+- **No Consent**: You can only see records you created
+- **Consent Expired**: Need to request renewal
+
+## Best Practices
+
+<Steps>
+  <Step title="Review before consultation">
+    Quickly scan patient summary and recent timeline entries before the patient enters
+  </Step>
+  <Step title="Check allergies first">
+    Always verify drug allergies before prescribing
+  </Step>
+  <Step title="Use AI assistant">
+    Ask quick questions via chatbot during consultation for instant context
+  </Step>
+  <Step title="Look for patterns">
+    Check for recurring symptoms or conditions across timeline
+  </Step>
+  <Step title="Verify compliance">
+    Review if patient is following previous treatment plans
+  </Step>
+</Steps>
+
+<Tip>
+  Keep the patient timeline open on a second screen during consultations for seamless reference without interrupting patient interaction.
+</Tip>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Create Prescriptions" icon="edit" href="/doctors/prescriptions">
+    Learn how to create ABHA-linked digital prescriptions
+  </Card>
+  <Card title="Voice Dictation" icon="microphone" href="/doctors/smart-dictation">
+    Use AI-powered dictation for faster documentation
+  </Card>
+  <Card title="Overview" icon="home" href="/doctors/overview">
+    Return to doctor platform overview
+  </Card>
+</CardGroup>

@@ -1,0 +1,438 @@
+---
+title: 'Security & Privacy'
+description: 'Security architecture and data protection measures in Aria Healthcare'
+---
+
+## Overview
+
+Aria Healthcare implements comprehensive security measures to protect sensitive patient data and ensure compliance with healthcare regulations. Our architecture prioritizes data protection, secure authentication, and privacy-first design.
+
+## Data Protection
+
+### Database Security
+
+Supabase provides enterprise-grade PostgreSQL database with built-in security features:
+
+<Tabs>
+  <Tab title="Row-Level Security">
+    ### PostgreSQL RLS Policies
+    
+    Row-Level Security (RLS) ensures users can only access data they're authorized to see.
+
+    ```sql
+    -- Example RLS policy for waitlist table
+    CREATE POLICY "Users can only view their own waitlist entries"
+      ON waitlist
+      FOR SELECT
+      USING (auth.uid() = user_id);
+
+    -- Example RLS policy for patient records
+    CREATE POLICY "Doctors can view patient records they have access to"
+      ON patient_records
+      FOR SELECT
+      USING (
+        EXISTS (
+          SELECT 1 FROM doctor_patient_access
+          WHERE doctor_id = auth.uid()
+          AND patient_id = patient_records.patient_id
+        )
+      );
+    ```
+
+    <Warning>
+      All database tables must have RLS enabled to prevent unauthorized data access.
+    </Warning>
+  </Tab>
+  
+  <Tab title="Data Encryption">
+    ### Encryption at Rest
+    
+    - Database: AES-256 encryption for all stored data
+    - File storage: Encrypted file uploads for medical records
+    - Backups: Encrypted automated backups
+
+    ### Encryption in Transit
+    
+    - TLS 1.3 for all API communications
+    - HTTPS enforced across entire application
+    - Secure WebSocket connections for real-time features
+
+    ```typescript
+    // All Supabase connections use HTTPS
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL, // Always HTTPS
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    );
+    ```
+  </Tab>
+  
+  <Tab title="Access Control">
+    ### Authentication
+    
+    - Multi-factor authentication (MFA) support
+    - Session management with automatic timeout
+    - Secure password hashing (bcrypt)
+    - OAuth integration for third-party auth
+
+    ### Authorization
+    
+    - Role-based access control (RBAC)
+    - Granular permission system
+    - API key rotation policies
+    - Audit logging for access attempts
+  </Tab>
+</Tabs>
+
+## ABHA Integration Security
+
+### Ayushman Bharat Health Account (ABHA)
+
+Aria integrates with India's national digital health ecosystem with strict security measures:
+
+<CodeGroup>
+```typescript ABHA Authentication
+// Secure ABHA integration pattern
+interface ABHACredentials {
+  abhaNumber: string;
+  abhaAddress: string;
+  mobileNumber: string;
+  consentToken: string;
+}
+
+async function authenticateABHA(credentials: ABHACredentials) {
+  // Validate ABHA format
+  const abhaPattern = /^\d{14}$/;
+  if (!abhaPattern.test(credentials.abhaNumber)) {
+    throw new Error('Invalid ABHA number format');
+  }
+
+  // Secure API call with encrypted payload
+  const response = await fetch('https://abha.abdm.gov.in/abha/v3/auth', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${process.env.ABHA_API_KEY}`,
+    },
+    body: JSON.stringify({
+      abhaNumber: credentials.abhaNumber,
+      consentToken: credentials.consentToken,
+    }),
+  });
+
+  return response.json();
+}
+```
+</CodeGroup>
+
+### ABHA Security Features
+
+1. **Consent Management**
+   - Patient-controlled data sharing
+   - Granular consent for specific records
+   - Consent revocation capabilities
+   - Audit trail of all consent actions
+
+2. **Data Linking**
+   - Secure ABHA number verification
+   - OTP-based authentication
+   - Mobile number validation
+   - Aadhaar-based identity verification
+
+3. **API Security**
+   - Encrypted API communications
+   - Rate limiting to prevent abuse
+   - IP whitelisting for production
+   - Regular security audits
+
+<Note>
+  Learn more about ABHA at [https://abha.abdm.gov.in/abha/v3](https://abha.abdm.gov.in/abha/v3)
+</Note>
+
+## Patient Data Privacy
+
+### HIPAA-Aligned Practices
+
+While Aria operates in India, we follow HIPAA-aligned best practices:
+
+<Tabs>
+  <Tab title="Data Minimization">
+    ### Collect Only What's Needed
+    
+    <CodeGroup>
+    ```tsx Waitlist Form Validation
+    const formSchema = z.object({
+      name: z.string().min(1, {
+        message: "Please enter your name.",
+      }),
+      userType: z.enum(["doctor", "patient", "other"], {
+        required_error: "Please select your main use case.",
+      }),
+      phoneNumber: z.string().min(5, {
+        message: "Please enter a valid phone number.",
+      }),
+      email: z.string().email({
+        message: "Please enter a valid email address.",
+      }),
+      // No sensitive medical data collected at signup
+    });
+    ```
+    </CodeGroup>
+
+    - Only essential information collected
+    - No medical data in waitlist forms
+    - Optional fields clearly marked
+    - Data retention policies enforced
+  </Tab>
+  
+  <Tab title="Data Anonymization">
+    ### Privacy-Preserving Analytics
+    
+    ```typescript
+    // Analytics without PII
+    import { Analytics } from "@vercel/analytics/react";
+    
+    // Automatically anonymizes IP addresses
+    // No personal identifiers sent to analytics
+    <Analytics />
+    ```
+
+    - Personal identifiers stripped from analytics
+    - Aggregated data only for insights
+    - IP address anonymization
+    - No cross-site tracking
+  </Tab>
+  
+  <Tab title="User Control">
+    ### Patient Rights
+    
+    Patients have full control over their data:
+
+    - **Right to Access**: View all stored data
+    - **Right to Rectification**: Update incorrect data
+    - **Right to Erasure**: Delete account and data
+    - **Right to Portability**: Export data in standard formats
+    - **Right to Object**: Opt-out of data processing
+  </Tab>
+</Tabs>
+
+## Secure Form Handling
+
+### Client-Side Validation
+
+<CodeGroup>
+```tsx app/waitlist/page.tsx
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { supabase } from "@/integrations/supabase/client";
+
+const formSchema = z.object({
+  name: z.string().min(1, { message: "Please enter your name." }),
+  email: z.string().email({ message: "Please enter a valid email address." }),
+  phoneNumber: z.string().min(5, { message: "Please enter a valid phone number." }),
+});
+
+async function onSubmit(values: z.infer<typeof formSchema>) {
+  try {
+    // Sanitize phone number
+    const { customList } = await import("country-codes-list");
+    const callingCodes = customList("countryCode", "+{countryCallingCode}");
+    const callingCode = callingCodes[values.phoneNumberCountryCode];
+    const fullPhoneNumber = `${callingCode} ${values.phoneNumber}`;
+    
+    // Secure database insertion
+    const { error } = await supabase
+      .from('waitlist')
+      .insert({
+        name: values.name,
+        phone_number: fullPhoneNumber,
+        email: values.email,
+      });
+
+    if (error) throw error;
+
+    // Success notification
+    toast({
+      title: "You're on the list!",
+      description: "We'll be in touch soon.",
+    });
+    
+    // Clear form data
+    form.reset();
+  } catch (error) {
+    console.error('Error submitting form:', error);
+    toast({
+      title: "Something went wrong",
+      description: "Please try again later.",
+      variant: "destructive",
+    });
+  }
+}
+```
+</CodeGroup>
+
+### Security Measures in Form Handling
+
+1. **Input Validation**
+   - Zod schema validation before submission
+   - Type-safe form handling
+   - XSS prevention through sanitization
+   - SQL injection prevention via parameterized queries
+
+2. **Error Handling**
+   - Generic error messages to users
+   - Detailed errors logged server-side only
+   - No sensitive data in error messages
+   - Rate limiting on form submissions
+
+3. **Data Sanitization**
+   - Phone number formatting and validation
+   - Email format verification
+   - Special character escaping
+   - Whitespace trimming
+
+## Environment Variables
+
+### Secure Configuration Management
+
+<CodeGroup>
+```typescript src/integrations/supabase/client.ts
+// Environment variable handling
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.error('Missing Supabase environment variables');
+}
+
+// Use placeholder for build-time safety
+export const supabase = createClient(
+  supabaseUrl || 'https://placeholder.supabase.co',
+  supabaseAnonKey || 'placeholder',
+);
+```
+
+```bash .env.local (Example - Never Commit)
+# Supabase Configuration
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+
+# ABHA Integration
+ABHA_API_KEY=your-abha-api-key
+ABHA_CLIENT_ID=your-client-id
+ABHA_CLIENT_SECRET=your-client-secret
+
+# Never commit this file to version control
+```
+</CodeGroup>
+
+<Warning>
+  Never commit `.env.local`, `.env.production`, or any files containing sensitive credentials to version control.
+</Warning>
+
+### Best Practices
+
+- Use different keys for development and production
+- Rotate API keys regularly
+- Store secrets in secure vault (e.g., Vercel Environment Variables)
+- Limit API key permissions to minimum required
+- Monitor API usage for anomalies
+
+## Compliance & Standards
+
+### Indian Healthcare Regulations
+
+1. **Digital Information Security in Healthcare Act (DISHA)**
+   - Data localization requirements
+   - Patient consent management
+   - Breach notification protocols
+
+2. **Information Technology Act, 2000**
+   - Reasonable security practices
+   - Data protection measures
+   - Compensation for data breaches
+
+3. **ABDM Guidelines**
+   - ABHA integration standards
+   - Health data exchange protocols
+   - Consent artifact management
+
+### Security Audits
+
+- Regular penetration testing
+- Code security reviews
+- Dependency vulnerability scanning
+- Third-party security assessments
+
+## Incident Response
+
+### Security Breach Protocol
+
+1. **Detection**: Automated monitoring and alerting
+2. **Containment**: Immediate isolation of affected systems
+3. **Eradication**: Remove threat and patch vulnerabilities
+4. **Recovery**: Restore services from secure backups
+5. **Notification**: Inform affected users within 72 hours
+6. **Review**: Post-incident analysis and improvements
+
+## Session Management
+
+<CodeGroup>
+```typescript
+// Secure session handling with Supabase
+const { data: session } = await supabase.auth.getSession();
+
+if (!session) {
+  // Redirect to login
+  redirect('/login');
+}
+
+// Auto-refresh tokens
+supabase.auth.onAuthStateChange((event, session) => {
+  if (event === 'SIGNED_OUT') {
+    // Clear local data
+    localStorage.clear();
+    sessionStorage.clear();
+  }
+});
+
+// Session timeout after 1 hour of inactivity
+const SESSION_TIMEOUT = 3600000; // 1 hour in milliseconds
+```
+</CodeGroup>
+
+## API Security
+
+### Rate Limiting
+
+```typescript
+// Supabase automatically implements rate limiting
+// Additional custom rate limiting for sensitive operations
+const rateLimiter = {
+  maxRequests: 10,
+  windowMs: 60000, // 1 minute
+};
+```
+
+### CORS Configuration
+
+```javascript next.config.mjs
+const nextConfig = {
+  async headers() {
+    return [
+      {
+        source: '/api/:path*',
+        headers: [
+          { key: 'Access-Control-Allow-Origin', value: 'https://www.ariamed.ai' },
+          { key: 'Access-Control-Allow-Methods', value: 'GET,POST,PUT,DELETE' },
+          { key: 'Access-Control-Allow-Headers', value: 'Content-Type, Authorization' },
+        ],
+      },
+    ];
+  },
+};
+```
+
+<Note>
+  Security is an ongoing process. We continuously monitor and update our security measures to protect patient data.
+</Note>

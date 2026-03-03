@@ -1,0 +1,218 @@
+---
+title: AI-Powered Smart Assistance
+description: Leverage AI-powered features including smart dictation with entity recognition, intelligent medication search, and RAG-powered patient health assistant
+---
+
+Aria's AI capabilities transform how doctors create prescriptions and access patient information. Our intelligent features recognize medical entities in real-time, provide instant medication lookups, and enable natural language queries about patient history.
+
+## Medical Voice Dictation
+
+Speak naturally to create prescriptions while our AI automatically identifies and highlights medical entities as you dictate.
+
+### Real-Time Entity Recognition
+
+As you speak, Aria's AI engine detects and categorizes:
+
+<CardGroup cols={2}>
+  <Card title="Medications" icon="pill">
+    Automatically identifies drug names with dosages (e.g., "Paracetamol 500mg", "Cetirizine 10mg")
+  </Card>
+  <Card title="Symptoms" icon="activity">
+    Recognizes patient complaints and symptoms (e.g., "fever", "headache", "body aches")
+  </Card>
+</CardGroup>
+
+### How It Works
+
+<Steps>
+  <Step title="Start Dictation">
+    Tap the microphone icon to begin voice input. Speak naturally about the patient's condition and treatment plan.
+  </Step>
+  
+  <Step title="Real-Time Processing">
+    Our AI processes your speech in real-time, transcribing and highlighting medical entities as you speak.
+    
+    Example dictation:
+    ```
+    "Patient complains of fever and headache for 3 days. 
+    Prescribing Paracetamol 500mg and Cetirizine 10mg for symptom relief."
+    ```
+  </Step>
+  
+  <Step title="Automatic Classification">
+    Detected entities are automatically categorized and displayed:
+    - **Symptoms**: fever, headache (highlighted in amber)
+    - **Medications**: Paracetamol 500mg, Cetirizine 10mg (highlighted with border)
+  </Step>
+  
+  <Step title="Review and Confirm">
+    Review the transcribed text with highlighted entities. Edit if needed, then add to prescription.
+  </Step>
+</Steps>
+
+<Note>
+The smart dictation feature supports medical terminology in English and recognizes common Indian medication brands.
+</Note>
+
+## Smart Medication Search
+
+Type just a few letters to instantly search our ABHA-compliant database of 100,000+ medications.
+
+### Intelligent Autocomplete
+
+Aria's medication search provides:
+
+- **Instant Results**: Search results appear as you type, showing matching medications
+- **Dosage Variants**: All available dosage options for each medication
+- **Composition Details**: Full chemical composition for each variant
+- **One-Click Addition**: Add medications to prescriptions with a single tap
+
+### Example Search Flow
+
+<Steps>
+  <Step title="Start Typing">
+    Begin typing the medication name (e.g., "croc")
+  </Step>
+  
+  <Step title="View Results">
+    See all matching medications with dosage options:
+    - Crocin 500mg (Paracetamol)
+    - Crocin 650mg (Paracetamol)
+    - Crocin 1g (Paracetamol)
+    - Crocin Advance 500mg (Paracetamol + Caffeine)
+  </Step>
+  
+  <Step title="Select Medication">
+    Choose the appropriate dosage variant. The medication is instantly added to your prescription.
+  </Step>
+</Steps>
+
+<Info>
+All medications in the database are verified against ABHA standards and include composition information for allergy checking.
+</Info>
+
+## AI-Aided Diagnosis
+
+Get intelligent diagnosis suggestions based on patient complaints AND complete medical history.
+
+### Context-Aware Recommendations
+
+Unlike simple symptom checkers, Aria's AI cross-references:
+
+- Current chief complaints
+- Patient's previous prescriptions
+- Lab report history
+- Existing conditions and allergies
+- Seasonal patterns and trends
+
+### Diagnosis Workflow
+
+<Steps>
+  <Step title="Enter Complaints">
+    Type or dictate the patient's chief complaints:
+    ```
+    Fever (101°F), severe headache, body aches, fatigue for 3 days
+    ```
+  </Step>
+  
+  <Step title="AI Analysis">
+    Aria analyzes the complaints along with the patient's complete medical history from ABHA-linked records.
+  </Step>
+  
+  <Step title="Review Suggestions">
+    Receive ranked diagnosis suggestions with confidence scores:
+    
+    **Viral Fever (URI)** - 87% confidence
+    - Symptoms align with recent prescription history (Paracetamol, Dec 15)
+    - Seasonal pattern noted in patient records
+    
+    **Influenza Type B** - 68% confidence  
+    - High fever with body aches present
+    - No recent flu vaccination in records
+    - Consider PCR test for confirmation
+  </Step>
+  
+  <Step title="Make Informed Decision">
+    Use AI suggestions as a clinical decision support tool. Final diagnosis remains with the physician.
+  </Step>
+</Steps>
+
+<Warning>
+AI diagnosis suggestions are meant to assist clinical decision-making, not replace physician judgment. Always verify suggestions with clinical examination and appropriate diagnostic tests.
+</Warning>
+
+## Patient Health Assistant (RAG-Powered)
+
+Ask questions about any patient in natural language and get instant answers from their complete medical history.
+
+### RAG Technology
+
+Aria uses Retrieval-Augmented Generation (RAG) to:
+
+1. Retrieve relevant information from patient records
+2. Generate accurate, contextual answers
+3. Provide source citations for verification
+
+### Example Queries
+
+<CardGroup cols={1}>
+  <Card title="Health Summary">
+    **Query**: "Give me a summary of Sarah's health"
+    
+    **Response**: "Based on Sarah Johnson's records: She's a 34-year-old with recent URI symptoms. Last prescribed Paracetamol 500mg on Dec 15. Lab reports from Dec 10 show normal CBC. Previous history includes seasonal allergies. No chronic conditions. Overall healthy profile with occasional viral infections."
+  </Card>
+  
+  <Card title="Allergy Check">
+    **Query**: "Any drug allergies?"
+    
+    **Response**: "No documented drug allergies in Sarah Johnson's medical history. She has tolerated Paracetamol, Cetirizine, and common antibiotics well in past prescriptions."
+  </Card>
+  
+  <Card title="Medication History">
+    **Query**: "What medications has she taken in the past 3 months?"
+    
+    **Response**: References specific prescriptions with dates, dosages, and treatment durations from the patient's history.
+  </Card>
+</CardGroup>
+
+### Use Cases
+
+- Quick allergy checks before prescribing
+- Review previous treatment responses
+- Identify medication patterns
+- Verify patient-reported medical history
+- Prepare for patient consultations
+
+<Info>
+All RAG responses include timestamps and can be traced back to specific records in the patient timeline for verification.
+</Info>
+
+## Privacy and Security
+
+All AI features are designed with patient privacy at the core:
+
+- **ABHA Compliance**: Full compliance with ABDM data standards
+- **Encrypted Processing**: All AI processing uses encrypted patient data
+- **Audit Trails**: Every AI interaction is logged for accountability
+- **Doctor Control**: Physicians have final say on all AI-generated suggestions
+- **Data Residency**: Patient data remains in India, compliant with data localization requirements
+
+## Best Practices
+
+<Steps>
+  <Step title="Verify AI Outputs">
+    Always review AI-generated transcriptions, medications, and diagnosis suggestions before finalizing.
+  </Step>
+  
+  <Step title="Combine with Clinical Judgment">
+    Use AI assistance as a tool to enhance, not replace, clinical decision-making.
+  </Step>
+  
+  <Step title="Keep Records Updated">
+    Ensure patient records are current for more accurate AI insights.
+  </Step>
+  
+  <Step title="Provide Feedback">
+    Report any AI inaccuracies to help improve the system over time.
+  </Step>
+</Steps>

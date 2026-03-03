@@ -1,0 +1,339 @@
+---
+title: Digital Prescriptions
+description: Create, manage, and share ABHA-linked digital prescriptions with complete medication tracking and history
+---
+
+Aria's digital prescription system revolutionizes how doctors create and patients access prescriptions. Built on ABHA standards, every prescription is permanently linked to the patient's medical record and accessible anytime, anywhere.
+
+## ABHA Integration
+
+Aria is fully integrated with India's Ayushman Bharat Digital Mission (ABDM) infrastructure.
+
+### What is ABHA?
+
+ABHA (Ayushman Bharat Health Account) is a unique 14-digit health ID that enables:
+
+- **Unified Medical Records**: All prescriptions and records linked to one ID
+- **Interoperability**: Share records across healthcare providers
+- **Patient Control**: Patients own and control their health data
+- **Lifetime Access**: Permanent medical record that never gets lost
+
+<Info>
+Learn more about ABHA at [abha.abdm.gov.in](https://abha.abdm.gov.in/abha/v3)
+</Info>
+
+### ABHA-Linked Prescriptions
+
+Every prescription created in Aria:
+
+<CardGroup cols={2}>
+  <Card title="Automatically Linked" icon="link">
+    Instantly linked to patient's ABHA ID for permanent record-keeping
+  </Card>
+  <Card title="Always Accessible" icon="clock">
+    Patient can access from any ABHA-compatible app or healthcare facility
+  </Card>
+  <Card title="Fully Compliant" icon="shield-check">
+    Meets all ABDM data standards and security requirements
+  </Card>
+  <Card title="Shareable" icon="share-2">
+    Easily share with other doctors, pharmacies, or insurance providers
+  </Card>
+</CardGroup>
+
+## Creating Prescriptions
+
+Aria offers multiple ways to create prescriptions efficiently.
+
+### Voice Dictation Method
+
+<Steps>
+  <Step title="Select Patient">
+    Choose the patient from your list or search by ABHA ID/name.
+  </Step>
+  
+  <Step title="Activate Voice Input">
+    Tap the microphone icon to start dictation mode.
+  </Step>
+  
+  <Step title="Speak Naturally">
+    Dictate the prescription details:
+    ```
+    "Patient complains of fever and headache for 3 days. 
+    Prescribing Paracetamol 500mg and Cetirizine 10mg for symptom relief."
+    ```
+  </Step>
+  
+  <Step title="Review Detected Entities">
+    AI automatically highlights:
+    - Symptoms: fever, headache
+    - Medications: Paracetamol 500mg, Cetirizine 10mg
+  </Step>
+  
+  <Step title="Add Prescription Details">
+    Specify for each medication:
+    - Dosage frequency (e.g., "twice daily")
+    - Duration (e.g., "5 days")
+    - Instructions (e.g., "after meals")
+  </Step>
+  
+  <Step title="Save and Share">
+    Save the prescription. Patient instantly receives it via their ABHA-linked app.
+  </Step>
+</Steps>
+
+### Manual Entry Method
+
+<Steps>
+  <Step title="Search Medication">
+    Use the smart search to find medications:
+    - Type partial name (e.g., "para" for Paracetamol)
+    - Select from dosage variants
+    - View composition and alternatives
+  </Step>
+  
+  <Step title="Configure Dosage">
+    Set medication details:
+    - Quantity per dose
+    - Frequency (OD/BD/TDS/QID or custom)
+    - Route (oral/topical/injection)
+    - Duration
+  </Step>
+  
+  <Step title="Add Diagnosis">
+    Enter the diagnosis or chief complaint for the prescription.
+  </Step>
+  
+  <Step title="Include Notes">
+    Add any special instructions or follow-up recommendations.
+  </Step>
+  
+  <Step title="Finalize">
+    Review and save. The prescription is automatically linked to the patient's ABHA record.
+  </Step>
+</Steps>
+
+## Prescription Components
+
+Each digital prescription in Aria includes:
+
+### Patient Information
+- ABHA ID
+- Name, age, gender
+- Contact information
+- Known allergies and conditions
+
+### Clinical Information
+- Chief complaints/symptoms
+- Diagnosis (with ICD-10 code support)
+- Vital signs (if recorded)
+- Clinical notes
+
+### Medication Details
+For each prescribed medication:
+
+```json
+{
+  "medication": "Paracetamol 500mg",
+  "composition": "Paracetamol",
+  "dosage": "1 tablet",
+  "frequency": "Twice daily",
+  "timing": "After meals",
+  "duration": "5 days",
+  "route": "Oral"
+}
+```
+
+### Doctor Information
+- Doctor's name and registration number
+- Clinic/hospital details
+- Digital signature
+- Prescription date and time
+
+<Note>
+All prescriptions are timestamped and include a unique prescription ID for tracking and verification.
+</Note>
+
+## Managing Prescriptions
+
+### View Patient History
+
+Access complete prescription history for any patient:
+
+- Chronological timeline of all prescriptions
+- Filter by date range or medication
+- Search by diagnosis or symptom
+- Export for insurance or referral purposes
+
+### Modify Prescriptions
+
+<Warning>
+Once saved, prescriptions cannot be edited to maintain medical record integrity. To make changes, create a new prescription with updated information. The system maintains an audit trail of all prescriptions.
+</Warning>
+
+### Prescription Templates
+
+Save time with prescription templates for common conditions:
+
+<Steps>
+  <Step title="Create Template">
+    Create a template for frequently prescribed treatment plans (e.g., "Common Cold", "Hypertension Follow-up").
+  </Step>
+  
+  <Step title="Save Medications">
+    Add standard medications with default dosages and instructions.
+  </Step>
+  
+  <Step title="Quick Use">
+    Select template when creating a new prescription. Modify as needed for the specific patient.
+  </Step>
+</Steps>
+
+## Patient Access
+
+Patients can access their prescriptions through:
+
+### Aria Patient App
+- View all prescriptions in chronological order
+- Download PDF copies
+- Share with pharmacies or other doctors
+- Set medication reminders
+
+### ABHA-Compatible Apps
+- Access prescriptions from any ABDM-registered app
+- Seamless interoperability across healthcare providers
+
+### Digital Prescription Features for Patients
+
+<CardGroup cols={2}>
+  <Card title="Never Lose Prescriptions" icon="file-check">
+    All prescriptions stored permanently in the cloud, linked to ABHA ID
+  </Card>
+  <Card title="Share Easily" icon="share">
+    Share with family members, pharmacies, or specialists with one tap
+  </Card>
+  <Card title="Medication Reminders" icon="bell">
+    Set automatic reminders for medication times and refills
+  </Card>
+  <Card title="Track Adherence" icon="trending-up">
+    Monitor medication adherence and treatment progress
+  </Card>
+</CardGroup>
+
+## Medication Database
+
+Aria's medication search is powered by an ABHA-compliant database featuring:
+
+- **100,000+ Medications**: Comprehensive coverage of Indian pharmaceutical market
+- **Brand and Generic Names**: Search by either brand name or generic composition
+- **Dosage Variants**: All available strengths and formulations
+- **Composition Details**: Full ingredient information for allergy checking
+- **Regular Updates**: Database updated monthly with new medications and formulations
+
+### Example Medication Entries
+
+<CodeGroup>
+```json Crocin Variants
+[
+  {
+    "name": "Crocin 500mg",
+    "dosage": "500mg",
+    "composition": "Paracetamol",
+    "manufacturer": "GSK"
+  },
+  {
+    "name": "Crocin 650mg",
+    "dosage": "650mg",
+    "composition": "Paracetamol",
+    "manufacturer": "GSK"
+  },
+  {
+    "name": "Crocin Advance 500mg",
+    "dosage": "500mg",
+    "composition": "Paracetamol + Caffeine",
+    "manufacturer": "GSK"
+  }
+]
+```
+
+```json Rejunuron Variants
+[
+  {
+    "name": "Rejunuron OD",
+    "dosage": "OD",
+    "composition": "Methylcobalamin + ALA + Folic Acid",
+    "manufacturer": "Mankind"
+  },
+  {
+    "name": "Rejunuron Plus",
+    "dosage": "Plus",
+    "composition": "Methylcobalamin + Vitamin B6",
+    "manufacturer": "Mankind"
+  }
+]
+```
+</CodeGroup>
+
+## Compliance and Security
+
+### ABDM Compliance
+
+Aria's prescription system is fully compliant with:
+
+- ABDM data standards and APIs
+- FHIR (Fast Healthcare Interoperability Resources) format
+- Digital signature requirements
+- Audit and logging requirements
+
+### Security Measures
+
+<CardGroup cols={2}>
+  <Card title="End-to-End Encryption" icon="lock">
+    All prescription data encrypted in transit and at rest
+  </Card>
+  <Card title="Access Controls" icon="shield">
+    Role-based access ensures only authorized users view prescriptions
+  </Card>
+  <Card title="Audit Trails" icon="file-text">
+    Complete logging of all prescription creation and access events
+  </Card>
+  <Card title="Data Residency" icon="map-pin">
+    All data stored in India, compliant with data localization laws
+  </Card>
+</CardGroup>
+
+<Info>
+Aria undergoes regular security audits and maintains SOC 2 compliance for healthcare data management.
+</Info>
+
+## Best Practices
+
+<Steps>
+  <Step title="Verify Patient Identity">
+    Always confirm the patient's ABHA ID before creating a prescription to ensure correct record linkage.
+  </Step>
+  
+  <Step title="Check Allergies">
+    Review patient allergies before prescribing. Use the RAG assistant to quickly check: "Any drug allergies?"
+  </Step>
+  
+  <Step title="Complete All Fields">
+    Include diagnosis, dosage instructions, and duration for comprehensive patient records.
+  </Step>
+  
+  <Step title="Use Standard Terminology">
+    Use standard medical terminology and ICD-10 codes when available for better interoperability.
+  </Step>
+  
+  <Step title="Regular Follow-ups">
+    Schedule and document follow-up appointments in the prescription notes.
+  </Step>
+</Steps>
+
+## Support
+
+For prescription-related questions:
+
+- **Technical Issues**: Contact support through the app's help section
+- **ABHA Integration**: Visit ABDM's official documentation
+- **Medication Database Updates**: Suggestions can be submitted through the feedback form
